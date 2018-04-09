@@ -33,11 +33,11 @@ export const firebaseConfig = {
   ],
   imports: [
     BrowserModule,
-    routing,
     FormsModule,
     HttpModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    routing
   ],
   providers: [],
   bootstrap: [AppComponent]

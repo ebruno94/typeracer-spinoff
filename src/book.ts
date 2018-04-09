@@ -1,8 +1,8 @@
-{"book":[
+export const BOOK = {book:[
   {
-    "name":"Adventures of Tom Sawyer",
-    "author":"Mark Twain",
-    "content":"“TOM!”
+    name:"Adventures of Tom Sawyer",
+    author:"Mark Twain",
+    content:`“TOM!”
 
       No answer.
 
@@ -8376,6 +8376,6 @@
       prosperous and happy. Some day it may seem worth while to take up the
       story of the younger ones again and see what sort of men and women they
       turned out to be; therefore it will be wisest not to reveal any of that
-      part of their lives at present."
+      part of their lives at present.`
   }
 ]}
