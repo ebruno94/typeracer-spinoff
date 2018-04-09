@@ -7,6 +7,8 @@ import { masterFirebaseConfig } from './api-keys.ts';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 
+import { routing } from './app.routing';
+
 
 import { AppComponent } from './app.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
@@ -31,6 +33,7 @@ export const firebaseConfig = {
   ],
   imports: [
     BrowserModule,
+    routing,
     FormsModule,
     HttpModule,
     AngularFireModule.initializeApp(firebaseConfig),
