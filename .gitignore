@@ -9,6 +9,9 @@
 # dependencies
 /node_modules
 
+#firebase-api-keys
+/src/app/api-keys.ts
+
 # IDEs and editors
 /.idea
 .project
