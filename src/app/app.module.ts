@@ -3,9 +3,11 @@ import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 
-import { masterFirebaseConfig } from './api-keys.ts';
+import { masterFirebaseConfig } from './api-keys';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+
+import { routing } from './app.routing';
 
 
 import { AppComponent } from './app.component';
@@ -31,6 +33,7 @@ export const firebaseConfig = {
   ],
   imports: [
     BrowserModule,
+    routing,
     FormsModule,
     HttpModule,
     AngularFireModule.initializeApp(firebaseConfig),

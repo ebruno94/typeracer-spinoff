@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../user.model';
+
 import { Router } from '@angular/router';
 import { UserService } from '../user.service';
 import { FirebaseListObservable } from 'angularfire2/database';
@@ -19,11 +20,12 @@ export class UserPanelComponent implements OnInit {
   constructor(private router: Router, private userService: UserService){}
 
   ngOnInit(){
-  this.users = this.UserService.get();
+
+  // this. = this.showService.get();
 
 }
-
-  goToUserDetailPage(clickedShow) {
-    this.router.navigate(['', clickedUser.$key]);
-  };
+//
+//   goToUserDetailPage(clickedShow) {
+//     this.router.navigate(['', clicked.$key]);
+//   };
 }
