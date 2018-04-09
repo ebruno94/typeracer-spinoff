@@ -3,31 +3,35 @@ import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable }
 import { BOOK } from '../book'
 
 @Injectable()
-export class GameService implements OnInit {
+export class GameService {
 
-  constructor(private database: AngularFireDatabase ) { }
+  constructor(public database: AngularFireDatabase ) { }
 
+  allBalloonsArray: FirebaseListObservable<any>;
   activeBalloons: FirebaseListObservable<any>;
   activeGame: FirebaseObjectObservable<any>;
   currentUser: string = null;
   whichPlayer: string = null;
-  isHost: boolean = false;
+  isHost: boolean = true;
   book = null;
+  allBalloonsArrayKey = null;
 
-  ngOnInit(){
-    this.activeBalloons.subscribe(data=>{
-      if (data.length < 5 && this.isHost) this.addBalloon();
-    });
+  getActiveBalloons(key){
+    this.activeBalloons = this.database.list('allBalloonsArray/activeBalloons/' + key);
   }
 
   popBalloon(balloonKey){
     let poppedBalloon;
-    this.activeBalloons.forEach(balloon=>{
-      if (balloon.$key === balloonKey) {
-        this.activeGame[this.whichPlayer]+=balloon.score;
-      }
+    this.activeBalloons.subscribe(data=>{
+      data.forEach(balloon=>{
+        if (balloon.$key === balloonKey) {
+          // this.activeGame[this.whichPlayer]+=balloon.score;
+        }
+      });
     })
-    this.activeBalloons.remove('balloons/' + this.activeBalloons.$key + '/balloon/' + balloonKey);
+    console.log("AllBalloonsArray: " + this.allBalloonsArrayKey)
+    console.log(balloonKey);
+    this.activeBalloons.remove(balloonKey);
   }
 
   addBalloon(){
@@ -43,7 +47,7 @@ export class GameService implements OnInit {
       //Picks a random starting character within the chontent of the book
 
       let randomIndex = Math.floor(Math.random()*BOOK.book[0].content.length);
-      let punctuation = /[!?.]/;
+      let punctuation = /[!?.,]/;
       if (punctuation.test(BOOK.book[0].content[randomIndex])){
         randomIndex += 1;
       }
@@ -64,7 +68,7 @@ export class GameService implements OnInit {
         return i;
       })();
 
-      return BOOK.book[0].content.slice(startingIndex, endingIndex);
+      return BOOK.book[0].content.slice(startingIndex+1, endingIndex);
 
     })();
 
@@ -72,24 +76,33 @@ export class GameService implements OnInit {
     this.activeBalloons.push(newBalloon);
   };
 
-  checkInput(input){
-    let myStyle = {};
+  checkInput(element){
+    console.log("changing");
+    let e = element;
+    let input = e.value;
     let hasMatch = false;
     let completedBalloon = null;
-    this.activeBalloons.forEach(balloon=>{
+    this.activeBalloons.subscribe(data=>{
+      data.forEach(balloon=>{
+      console.log(balloon.content.search(input));
       if (balloon.content.search(input) === 0) hasMatch = true;
-      if (balloon.content === input) completedBalloon = balloon.$key;
+      if (balloon.content === input) {
+        console.log("You matched a balloon!!!!");
+        completedBalloon = balloon.$key;
+        console.log(balloon.$key);
+      }
     })
+  })
 
     if (hasMatch) {
-      myStyle['color'] = 'green';
+      e.style.color = 'green';
     } else {
-      myStyle['color'] = 'red';
+      e.style.color = 'red';
     }
 
     if (completedBalloon) {
+      console.log("I be poppin");
       this.popBalloon(completedBalloon);
     }
-    return myStyle;
   }
 }
