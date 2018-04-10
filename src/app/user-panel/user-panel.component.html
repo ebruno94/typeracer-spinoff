@@ -6,13 +6,23 @@
       <h5>Win-Lose Ratio: </h5>
       <br><br>
       <div class="row">
-        <div class="col-md-12 text-center">
+        <div class="col-md-6 text-center">
           <button type="button" class="btn">Play!</button>
+        </div>
+        <div class="col-md-6 text-center">
+          <button type="button" class="btn">User Settings</button>
         </div>
       </div>
     </div>
     <div class="col-md-5 card">
       <h1>Friends List</h1>
+      <div class="card" id="friendCard">
+        <div *ngFor="let friend of friends">
+          <p>{{friend.name}}</p>
+          <p>{{friend.status}}</p>
+          <hr>
+        </div>
+      </div>
       <!-- <div *ngFor="let friend of friends">
         <h4>{{friend.name}}</h4>
         <p>{{friend.status}}</p>
@@ -27,7 +37,6 @@
     <div class="col-md-2 card">
       <br><br><br>
       <button type="button" class="btn">Enter</button><br>
-      <button type="button" class="btn">Settings</button>
     </div>
   </div>
 </div>

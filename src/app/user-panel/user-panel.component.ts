@@ -23,7 +23,35 @@ export class UserPanelComponent implements OnInit {
 
   // this. = this.showService.get();
 
-}
+  }
+
+  friends = [
+    {
+      name: "Ernest",
+      status: "Online"
+    },
+    {
+      name: "Justin",
+      status: "Offline"
+    },
+    {
+      name: "Alexander",
+      status: "Online"
+    },
+    {
+      name: "Jahmanz",
+      status: "Online"
+    },
+    {
+      name: "Tim",
+      status: "Online"
+    },
+    {
+      name: "Tyler",
+      status: "Online"
+    }
+  ]
+
 //
 //   goToUserDetailPage(clickedShow) {
 //     this.router.navigate(['', clicked.$key]);
