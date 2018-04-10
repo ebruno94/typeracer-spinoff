@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <p> user create works</p>
+      <h1 *ngIf="authService.user | async">Welcome {{ (authService.user | async)?.email }}!</h1>
+
+      <div *ngIf="!(authService.user | async)">
+        <input type="text" [(ngModel)]="userName" placeholder="username">
+        <br>
+        <input type="text" [(ngModel)]="email" placeholder="email">
+        <br>
+        <input type="password" [(ngModel)]="password" placeholder="password">
+        <br>
+
+        <button (click)="signup()" [disabled]="!userName || !email || !password">
+          Signup
+        </button>
+        <br>
+        <a href="/"><button>Login</button></a>
+
+      </div>
+    </div>
+  </div>
+</div>

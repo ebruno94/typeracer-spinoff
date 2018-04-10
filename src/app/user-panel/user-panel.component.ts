@@ -10,7 +10,7 @@ import { FirebaseListObservable } from 'angularfire2/database';
   selector: 'app-userpanel',
   templateUrl: './user-panel.component.html',
   styleUrls: ['./user-panel.component.css'],
-  providers: []
+  providers: [UserService]
 })
 
 export class UserPanelComponent implements OnInit {
