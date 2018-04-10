@@ -76,6 +76,13 @@ export class GameDisplayComponent implements OnInit {
 
   }
 
+<<<<<<< HEAD
+  tester(bookNumber){
+    this.gameService.newBalloons(bookNumber);
+    this.gameService.addBalloon();
+  }
+
+=======
   moveBalloon(balloon) {
 
   }
@@ -91,4 +98,5 @@ export class GameDisplayComponent implements OnInit {
     c.textAlign = 'center';
 	  c.fillText("test",150+300*i,650);
   }
+>>>>>>> 243197c6a7fceefece4254c78337a2f1eae07ed8
 }

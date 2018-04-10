@@ -17,4 +17,5 @@ export class GameComponent {
     this.currentGame = myGame;
   }
 
+
 }

@@ -6,6 +6,7 @@ import { ChatComponent } from './chat/chat.component';
 
 import { UserCreateComponent } from './user-create/user-create.component';
 import { GameComponent } from './game/game.component';
+import { GameDisplayComponent } from './game-display/game-display.component';
 
 const appRoutes: Routes = [
   {
@@ -23,7 +24,12 @@ const appRoutes: Routes = [
   {
     path: 'game/create',
     component: GameComponent
-  }
+  },
+  {
+    path: 'game/display',
+    component: GameDisplayComponent
+  },
+
 
 ];
 
