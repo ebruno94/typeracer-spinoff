@@ -1,2 +1,2 @@
-<app-game-create *ngIf="!gameIsActive" (triggerStartGame)="startGame()"></app-game-create>
-<app-game-display *ngIf="gameIsActive" [currentGame]="currentGame"></app-game-display>
+<!-- <app-game-create *ngIf="gameIsActive" (triggerStartGame)="startGame()"></app-game-create> -->
+<app-game-display [currentGame]="currentGame"></app-game-display>
