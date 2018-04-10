@@ -78,6 +78,7 @@ export class GameService {
   //   this.activeBalloons.push(newBalloon);
   // };
   addBalloon(){
+<<<<<<< HEAD
     this.newBalloons(0);
       let newBalloon = {
         score: 0,
@@ -100,6 +101,53 @@ export class GameService {
   newBalloons(bookNumber){
     this.allLocalSentences = BOOK.book[bookNumber].content.match( /[^\.!\?]+[\.!\?]+/g );
   }
+=======
+    let newBalloon = {
+      score: 0,
+      content: ''
+    };
+
+    //Sets the content of the new balloon
+
+    newBalloon.content = `The quick brown fox jumps over the lazy dog`;
+
+
+    /*(function(){*/
+
+      //Picks a random starting character within the chontent of the book
+    //
+    //   let randomIndex = Math.floor(Math.random()*(BOOK.book[0].content.length-2))+1;
+    //   let punctuation = /[!?.]/;
+    //
+    //   if (punctuation.test(BOOK.book[0].content[randomIndex])){
+    //     randomIndex += 1;
+    //   }
+    //
+    //   //Iterates backwards from random character to find first punctuation. Sets this index as starting point of returned string
+    //
+    //   let startingIndex = (function(){
+    //     let i;
+    //     for (i = randomIndex; !punctuation.test(BOOK.book[0].content[i]); i--){}
+    //     return i+1;
+    //   })();
+    //
+    //   //Iterates forwards from random character to find first punctuation. Sets this index as starting point of returned string
+    //
+    //   let endingIndex = (function(){
+    //     let i;
+    //     for (i = randomIndex; !punctuation.test(BOOK.book[0].content[i]); i++){}
+    //     return i;
+    //   })();
+    //
+    //   return BOOK.book[0].content.slice(startingIndex+1, endingIndex);
+    //
+    // })();
+
+    newBalloon.score = newBalloon.content.length;
+    this.activeBalloons.push(newBalloon);
+    return newBalloon;
+  };
+>>>>>>> 243197c6a7fceefece4254c78337a2f1eae07ed8
 
   checkInput(element){
     //console.log("changing");
