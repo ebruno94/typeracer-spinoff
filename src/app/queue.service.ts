@@ -13,9 +13,9 @@ export class QueueService {
     this.allGames = this.database.list('allGames');
   }
 
-  createNewGame(){
+  createNewGame(playerKey){
     let myNewGame = {
-      player1: null, //**Fill with current player ID
+      player1: playerKey, //**Fill with current player ID
       player2: null,
       balloonsArrayKey: null,
       player1Score: 0,
@@ -24,9 +24,7 @@ export class QueueService {
     }
     this.allGames.push(myNewGame)
     .then(snap=>{
-      this.allGames.subscribe(data=>{
-        this.myGame = data.object(snap.key);
-      })
+      this.myGame = this.database.object('allGames/'+snap.key);
     })
   }
 

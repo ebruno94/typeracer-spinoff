@@ -1,26 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router'
+import { PlayerService } from '../player.service'
 
 @Component({
   selector: 'app-user-create',
   templateUrl: './user-create.component.html',
   styleUrls: ['./user-create.component.css'],
-  providers: [AuthService]
+  providers: [AuthService, PlayerService ]
 })
 export class UserCreateComponent implements OnInit {
   //authService.user.uid
   userName: string;
   email: string;
   password: string;
-  constructor(private authService: AuthService, private router: Router){
+  constructor(private authService: AuthService, private router: Router, private playerService: PlayerService){
 
   }
-  signup() {
-    this.authService.signup(this.email, this.password)
+  signup(username) {
+    this.authService.signup(this.email, this.password);
     this.authService.user.subscribe(snap=>{
       if (snap !== null) {
         console.log("routing");
+        this.playerService.loginPlayer(snap.uid, username);
         this.router.navigate(['user', 'display', snap.uid])
       } else {
         console.log("failed to route");

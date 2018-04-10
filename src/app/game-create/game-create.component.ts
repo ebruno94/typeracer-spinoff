@@ -18,21 +18,25 @@ export class GameCreateComponent implements OnInit {
   }
 
   startQueue(){
-    let myGameSubscription = this.queueService.myGame.subscribe(data=>{
-      if (data.player2) this.startGame();
-    })
+    this.queueService.createNewGame('....');
 
     this.queueTimer = 30;
 
     let incrementTime = ()=>{
       if (this.queueTimer !== 0){
         this.queueTimer -= 1;
+        if (this.queueService.myGame){
+          this.queueService.myGame.subscribe(data=>{
+            console.log(data);
+            if (data.player2) this.startGame();
+          })
+        }
         setTimeout(incrementTime, 1000);
       }
     }
 
     setTimeout(()=>{
-      myGameSubscription.unsubscribe();
+      // myGameSubscription.unsubscribe();
     }, 30000)
 
     setTimeout(incrementTime, 1000);
