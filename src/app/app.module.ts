@@ -20,6 +20,7 @@ import { AdminComponent } from './admin/admin.component';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { GameCreateComponent } from './game-create/game-create.component';
 import { GameDisplayComponent } from './game-display/game-display.component';
+import { UserCreateComponent } from './user-create/user-create.component';
 
 export const firebaseConfig = {
   apiKey: masterFirebaseConfig.apiKey,
@@ -36,7 +37,8 @@ export const firebaseConfig = {
     GameComponent,
     AdminComponent,
     GameCreateComponent,
-    GameDisplayComponent
+    GameDisplayComponent,
+    UserCreateComponent
   ],
   imports: [
     BrowserModule,
