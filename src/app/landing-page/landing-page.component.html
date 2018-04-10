@@ -11,6 +11,7 @@
           Login
         </button>
         <button (click)="goRegister()" type="button" name="button" class="btn">Register</button>
+        <button (click)="goUserDisplay()" type="button" name="button" class="btn">UserDisplay</button>
       </div>
 
       <button (click)="logout()" *ngIf="authService.user | async">

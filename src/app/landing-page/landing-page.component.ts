@@ -30,4 +30,7 @@ export class LandingPageComponent implements OnInit {
     this.router.navigate(['user','create']);
   }
 
+  goUserDisplay(){
+    this.router.navigate(['user','display'])
+  }
 }
