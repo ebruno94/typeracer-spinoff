@@ -28,6 +28,10 @@ export class UserPanelComponent implements OnInit {
 
   }
 
+  startGame(){
+    this.router.navigate(['game', 'create']);
+  }
+
   friends = [
     {
       name: "Ernest",

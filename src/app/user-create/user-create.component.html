@@ -5,14 +5,14 @@
       <h1 *ngIf="authService.user | async">Welcome {{ (authService.user | async)?.email }}!</h1>
 
       <div *ngIf="!(authService.user | async)">
-        <input type="text" [(ngModel)]="userName" placeholder="username">
+        <input #username type="text" [(ngModel)]="userName" placeholder="username">
         <br>
         <input type="text" [(ngModel)]="email" placeholder="email">
         <br>
         <input type="password" [(ngModel)]="password" placeholder="password">
         <br>
 
-        <button (click)="signup()" [disabled]="!userName || !email || !password">
+        <button (click)="signup(username)" [disabled]="!userName || !email || !password">
           Signup
         </button>
         <br>

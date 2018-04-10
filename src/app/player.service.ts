@@ -15,26 +15,30 @@ export class PlayerService {
   loginPlayer(userId: string, username: string){
     let exists = false;
     this.players.subscribe(data=>{
+      console.log("about to read players");
       //checks to see if player with this userId already exists
       data.forEach(player=>{
+        console.log("reading players");
         if (player.uid === userId) {
           exists = true;
-          this.currentPlayer = player;
+          this.currentPlayer = this.database.object('players'+player.key);
+          console.log("this player already exists: " + player.uid);
         }
       });
       //if player does not already exist, create a new player
       if (!exists) {
         let newPlayer = {
-          userId: userId,
+          uid: userId,
           username: username,
           friends: [], //an array of friend keys
           wins: 0,
           losses: 0,
           loggedIn: true
         }
-        data.push(newPlayer)
+        this.players.push(newPlayer)
         .then(snap=>{
-          this.currentPlayer = snap;
+          console.log("this is your new player: " + snap.key);
+          this.currentPlayer = this.database.object('players/' + snap.key);
         });
       }
     });
