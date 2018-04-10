@@ -22,6 +22,7 @@ import { GameCreateComponent } from './game-create/game-create.component';
 import { GameDisplayComponent } from './game-display/game-display.component';
 import { UserCreateComponent } from './user-create/user-create.component'
 
+
 export const firebaseConfig = {
   apiKey: masterFirebaseConfig.apiKey,
   authDomain: masterFirebaseConfig.authDomain,
