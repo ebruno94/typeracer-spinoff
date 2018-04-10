@@ -1,6 +1,12 @@
 <p>
- game-display works!
+  game works!
 </p>
+<div id="balloons">
+  <!-- <p *ngFor="let balloon of gameService.activeBalloons | async">{{balloon.content}}</p> -->
+  <canvas #myCanvas width="1500" height="800" style="background:#CCFFFF;"></canvas>
+  <!-- <p *ngFor="let balloon of gameService.activeBalloons | async; let i = index"><span data-dummy="drawBalloon(balloon,i)"></span></p> -->
+</div>
+
 <div id="balloons">
   <p *ngFor="let balloon of gameService.activeBalloons | async">{{balloon.content}}</p>
 </div>

@@ -14,7 +14,7 @@ export class GameComponent {
 
   startGame(myGame: FirebaseObjectObservable<any>){
     this.gameIsActive = true;
-    this.currentGame = myGame; 
+    this.currentGame = myGame;
   }
 
 }
