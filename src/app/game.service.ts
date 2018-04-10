@@ -48,6 +48,7 @@ export class GameService {
 
       let randomIndex = Math.floor(Math.random()*(BOOK.book[0].content.length-2))+1;
       let punctuation = /[!?.,]/;
+
       if (punctuation.test(BOOK.book[0].content[randomIndex])){
         randomIndex += 1;
       }
