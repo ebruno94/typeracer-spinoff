@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { UserPanelComponent } from './user-panel/user-panel.component';
 import { UserCreateComponent } from './user-create/user-create.component';
-import { LandingPageComponent } from './landing-page/landing-page.component';
 import { GameComponent } from './game/game.component';
 
 const appRoutes: Routes = [

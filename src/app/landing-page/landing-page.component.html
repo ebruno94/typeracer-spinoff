@@ -1,15 +1,22 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
+      <p> Landing page works </p>
       <h1 *ngIf="authService.user | async">Welcome {{ (authService.user | async)?.email }}!</h1>
 
       <div *ngIf="!(authService.user | async)">
         <input type="text" [(ngModel)]="email" placeholder="email">
+        <br>
         <input type="password" [(ngModel)]="password" placeholder="password">
+        <br>
 
         <button (click)="login()" [disabled]="!email || !password">
           Login
         </button>
+        <br>
+        <a href="/user/create"><button>
+          Register
+        </button></a>
       </div>
 
       <button (click)="logout()" *ngIf="authService.user | async">
