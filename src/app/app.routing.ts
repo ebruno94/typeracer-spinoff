@@ -21,13 +21,6 @@ const appRoutes: Routes = [
     component: UserPanelComponent
   },
   {
-<<<<<<< HEAD
-=======
-    path: 'user/display',
-    component: ChatComponent
-  },
-  {
->>>>>>> be221f5e9d67418380cb92a194d2c826cc38e243
     path: 'game/create',
     component: GameComponent
   }
