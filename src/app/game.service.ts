@@ -47,7 +47,7 @@ export class GameService {
       //Picks a random starting character within the chontent of the book
 
       let randomIndex = Math.floor(Math.random()*BOOK.book[0].content.length);
-      let punctuation = /[!?.,]/;
+      let punctuation = /[!?.]/;
       if (punctuation.test(BOOK.book[0].content[randomIndex])){
         randomIndex += 1;
       }
