@@ -10,6 +10,7 @@
         <button (click)="login()" [disabled]="!email || !password">
           Login
         </button>
+        <button (click)="goRegister()" type="button" name="button" class="btn">Register</button>
       </div>
 
       <button (click)="logout()" *ngIf="authService.user | async">
