@@ -18,6 +18,10 @@ const appRoutes: Routes = [
     path: 'user/display',
     component: UserPanelComponent
   },
+  {
+    path: 'game/create',
+    component: GameComponent
+  }
 
 ];
 
