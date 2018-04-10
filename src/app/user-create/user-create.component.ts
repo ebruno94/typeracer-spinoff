@@ -8,15 +8,17 @@ import { AuthService } from '../auth.service';
   providers: [AuthService]
 })
 export class UserCreateComponent implements OnInit {
-
+  //authService.user.uid
+  userName: string;
+  email: string;
+  password: string;
   constructor(private authService: AuthService){
 
   }
-  email;
-  password;
   signup() {
     this.authService.signup(this.email, this.password);
     this.email = this.password = ''
+
   }
   ngOnInit(){}
 

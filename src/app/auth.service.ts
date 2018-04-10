@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
-
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
@@ -19,10 +18,12 @@ export class AuthService {
       .createUserWithEmailAndPassword(email, password)
       .then(value => {
         console.log('Success!', value);
+
+
       })
       .catch(err => {
         console.log('Something went wrong:',err.message);
-      });    
+      });
   }
 
   login(email: string, password: string) {

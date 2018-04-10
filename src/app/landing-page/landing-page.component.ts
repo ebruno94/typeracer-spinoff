@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../auth.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-landing-page',
@@ -10,10 +9,9 @@ import { Router } from '@angular/router';
 })
 export class LandingPageComponent implements OnInit {
 
-  constructor(private authService: AuthService, private router: Router) { }
-  email;
-  password;
-
+  constructor(private authService: AuthService) { }
+  email: string;
+  password: string;
   ngOnInit() {
   }
 
@@ -26,11 +24,4 @@ export class LandingPageComponent implements OnInit {
     this.authService.logout();
   }
 
-  goRegister(){
-    this.router.navigate(['user','create']);
-  }
-
-  goUserDisplay(){
-    this.router.navigate(['user','display'])
-  }
 }
