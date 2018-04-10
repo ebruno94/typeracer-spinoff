@@ -29,22 +29,12 @@
       </div> -->
     </div>
   </div>
-  <div class="row columns">
-  <button (click)="login()" *ngIf="!(user | async)?.uid">Anonymous Login</button>
-  <button (click)="logout()" *ngIf="(user | async)?.uid">Logout</button>
-
-  <input type="text" id="message" *ngIf="(user | async)?.uid" placeholder="What is it that you do?" (keyup.enter)="Send($event.target.value)" [(ngModel)]="msgVal" />
-  <div id="details-container">
-      <p *ngFor="let item of items | async"><img src="../assets/images/pin.svg">{{item.message}}</p>
-  </div>
+  <!-- <div class="row columns"> -->
+  <!-- <button (click)="login()" *ngIf="!(user | async)?.uid">Anonymous Login</button>
+  <button (click)="logout()" *ngIf="(user | async)?.uid">Logout</button> -->
   <div class="row">
-    <div class="col-md-10 card">
-      <h1>Chat room goes here</h1>
-      <textarea name="name" rows="8" cols="80"></textarea>
-    </div>
-    <div class="col-md-2 card">
-      <br><br><br>
-      <button type="button" class="btn">Enter</button><br>
+    <div class="col-md-12 card">
+      <app-chat></app-chat>
     </div>
   </div>
 </div>

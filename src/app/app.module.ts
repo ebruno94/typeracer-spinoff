@@ -16,7 +16,7 @@ import { routing } from './app.routing';
 import { AppComponent } from './app.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { UserPanelComponent } from './user-panel/user-panel.component';
-import { ChatComponent } from './user-panel/user-panel.component';
+import { ChatComponent } from './chat/chat.component';
 import { GameComponent } from './game/game.component';
 import { AdminComponent } from './admin/admin.component';
 import { AngularFireAuthModule } from 'angularfire2/auth';
