@@ -3,12 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { Router } from '@angular/router';
-<<<<<<< HEAD
-import { UserService } from '../user.service';
 import { AuthService } from '../auth.service';
-=======
-import { FirebaseListObservable } from 'angularfire2/database';
->>>>>>> 39b2d4b60c1e18fa5b9e8bb45a2336b3f3aaea7a
 
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';

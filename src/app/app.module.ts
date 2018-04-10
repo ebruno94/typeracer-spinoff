@@ -5,7 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { masterFirebaseConfig } from './api-keys';
-import { masterFirebaseChatConfig } from './api-keys';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 
@@ -34,14 +33,14 @@ export const firebaseConfig = {
   sotrageBucket: masterFirebaseConfig.storageBucket
 };
 
-export const firebaseChatConfig = {
-  apiKey: masterFirebaseChatConfig.apiKey,
-  authDomain: masterFirebaseChatConfig.authDomain,
-  databaseURL: masterFirebaseChatConfig.databaseURL,
-  projectId: masterFirebaseChatConfig.projectId,
-  storageBucket: masterFirebaseChatConfig.storageBucket,
-  messagingSenderId: masterFirebaseChatConfig.messagingSenderId
-};
+// export const firebaseChatConfig = {
+//   apiKey: masterFirebaseChatConfig.apiKey,
+//   authDomain: masterFirebaseChatConfig.authDomain,
+//   databaseURL: masterFirebaseChatConfig.databaseURL,
+//   projectId: masterFirebaseChatConfig.projectId,
+//   storageBucket: masterFirebaseChatConfig.storageBucket,
+//   messagingSenderId: masterFirebaseChatConfig.messagingSenderId
+// };
 
 @NgModule({
   declarations: [
@@ -63,7 +62,7 @@ export const firebaseChatConfig = {
     HttpModule,
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireModule.initializeApp(firebaseChatConfig),
+    // AngularFireModule.initializeApp(firebaseChatConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     routing
