@@ -3,8 +3,17 @@ import { Component, OnInit } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { Router } from '@angular/router';
+<<<<<<< HEAD
+import { UserService } from '../user.service';
+import { AuthService } from '../auth.service';
+=======
 import { FirebaseListObservable } from 'angularfire2/database';
+>>>>>>> 39b2d4b60c1e18fa5b9e8bb45a2336b3f3aaea7a
 
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { Observable } from 'rxjs/Observable';
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-userpanel',
@@ -13,7 +22,7 @@ import { FirebaseListObservable } from 'angularfire2/database';
 })
 
 export class UserPanelComponent implements OnInit {
-  shows: FirebaseListObservable<any[]>;
+  user: FirebaseListObservable<any[]>;
   currentRoute: string = this.router.url;
 
   constructor(private router: Router){}
@@ -55,4 +64,42 @@ export class UserPanelComponent implements OnInit {
 //   goToUserDetailPage(clickedShow) {
 //     this.router.navigate(['', clicked.$key]);
 //   };
+}
+
+@Component({
+  selector: 'app-userpanel',
+  templateUrl: './user-panel.component.html',
+  styleUrls: ['./user-panel.component.css']
+
+})
+
+export class ChatComponent {
+
+  user: Observable<firebase.User>;
+    items: FirebaseListObservable<any[]>;
+    msgVal: string = '';
+
+    constructor(public afAuth: AngularFireAuth, public af: AngularFireDatabase) {
+      this.items = af.list('/messages', {
+        query: {
+          limitToLast: 50
+        }
+      });
+
+      this.user = this.afAuth.authState;
+
+    }
+
+  login() {
+    this.afAuth.auth.signInAnonymously();
+  }
+
+  logout() {
+      this.afAuth.auth.signOut();
+  }
+
+  Send(desc: string) {
+      this.items.push({ message: desc});
+      this.msgVal = '';
+  }
 }

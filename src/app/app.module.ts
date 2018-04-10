@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { masterFirebaseConfig } from './api-keys';
+import { masterFirebaseChatConfig } from './api-keys';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 
@@ -16,6 +17,7 @@ import { routing } from './app.routing';
 import { AppComponent } from './app.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { UserPanelComponent } from './user-panel/user-panel.component';
+import { ChatComponent } from './user-panel/user-panel.component';
 import { GameComponent } from './game/game.component';
 import { AdminComponent } from './admin/admin.component';
 import { AngularFireAuthModule } from 'angularfire2/auth';
@@ -32,6 +34,15 @@ export const firebaseConfig = {
   sotrageBucket: masterFirebaseConfig.storageBucket
 };
 
+export const firebaseChatConfig = {
+  apiKey: masterFirebaseChatConfig.apiKey,
+  authDomain: masterFirebaseChatConfig.authDomain,
+  databaseURL: masterFirebaseChatConfig.databaseURL,
+  projectId: masterFirebaseChatConfig.projectId,
+  storageBucket: masterFirebaseChatConfig.storageBucket,
+  messagingSenderId: masterFirebaseChatConfig.messagingSenderId
+};
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +50,8 @@ export const firebaseConfig = {
     UserPanelComponent,
     GameComponent,
     AdminComponent,
+    ChatComponent,
+    UserCreateComponent,
     GameCreateComponent,
     GameDisplayComponent,
     UserCreateComponent,
@@ -50,8 +63,9 @@ export const firebaseConfig = {
     HttpModule,
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireAuthModule,
+    AngularFireModule.initializeApp(firebaseChatConfig),
     AngularFireDatabaseModule,
+    AngularFireAuthModule,
     routing
   ],
   providers: [AuthService],
