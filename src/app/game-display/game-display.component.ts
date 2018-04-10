@@ -35,4 +35,9 @@ export class GameDisplayComponent implements OnInit {
     });
   }
 
+  tester(bookNumber){
+    this.gameService.newBalloons(bookNumber);
+    this.gameService.addBalloon();
+  }
+
 }

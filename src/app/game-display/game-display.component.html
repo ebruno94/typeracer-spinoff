@@ -4,4 +4,8 @@
 <div id="balloons">
   <p *ngFor="let balloon of gameService.activeBalloons | async">{{balloon.content}}</p>
 </div>
+
+<button (click)="tester(5)" [disabled]="!userName || !email || !password">
+  Signup
+</button>
 <input #responseInput type="text" [ngModel]="responseInput.value" (ngModelChange)="gameService.checkInput(responseInput)">
