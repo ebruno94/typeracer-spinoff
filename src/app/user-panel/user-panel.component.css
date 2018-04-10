@@ -34,3 +34,8 @@ img {
     display:block;
     margin-bottom:12px;
 }
+
+#friendCard{
+  height: 200px;
+  overflow-y: scroll;
+}

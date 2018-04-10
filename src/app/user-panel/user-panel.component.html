@@ -6,13 +6,23 @@
       <h5>Win-Lose Ratio: </h5>
       <br><br>
       <div class="row">
-        <div class="col-md-12 text-center">
+        <div class="col-md-6 text-center">
           <button type="button" class="btn">Play!</button>
+        </div>
+        <div class="col-md-6 text-center">
+          <button type="button" class="btn" (click)="showDialog = !showDialog">User Settings</button>
         </div>
       </div>
     </div>
     <div class="col-md-5 card">
       <h1>Friends List</h1>
+      <div class="card" id="friendCard">
+        <div *ngFor="let friend of friends">
+          <p>{{friend.name}}</p>
+          <p>{{friend.status}}</p>
+          <hr>
+        </div>
+      </div>
       <!-- <div *ngFor="let friend of friends">
         <h4>{{friend.name}}</h4>
         <p>{{friend.status}}</p>
@@ -27,4 +37,25 @@
   <div id="details-container">
       <p *ngFor="let item of items | async"><img src="../assets/images/pin.svg">{{item.message}}</p>
   </div>
+  <div class="row">
+    <div class="col-md-10 card">
+      <h1>Chat room goes here</h1>
+      <textarea name="name" rows="8" cols="80"></textarea>
+    </div>
+    <div class="col-md-2 card">
+      <br><br><br>
+      <button type="button" class="btn">Enter</button><br>
+    </div>
+  </div>
 </div>
+
+<app-settings [(visible)]="showDialog">
+  <h1>Settings</h1>
+  <hr>
+  <h3>Change Username</h3>
+  <h3>Change Password</h3>
+  <h3>Whatever</h3>
+  <h4>Put whatever content you want in here</h4>
+  <hr>
+  <button style="float: right" type="button" class="btn" (click)="showDialog = !showDialog">Close</button>
+</app-settings>

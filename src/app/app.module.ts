@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { masterFirebaseConfig } from './api-keys';
 import { masterFirebaseChatConfig } from './api-keys';
@@ -20,7 +21,11 @@ import { ChatComponent } from './user-panel/user-panel.component';
 import { GameComponent } from './game/game.component';
 import { AdminComponent } from './admin/admin.component';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { GameCreateComponent } from './game-create/game-create.component';
+import { GameDisplayComponent } from './game-display/game-display.component';
 import { UserCreateComponent } from './user-create/user-create.component';
+import { SettingsComponent } from './settings/settings.component'
+
 
 export const firebaseConfig = {
   apiKey: masterFirebaseConfig.apiKey,
@@ -46,12 +51,17 @@ export const firebaseChatConfig = {
     GameComponent,
     AdminComponent,
     ChatComponent,
-    UserCreateComponent
+    UserCreateComponent,
+    GameCreateComponent,
+    GameDisplayComponent,
+    UserCreateComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
+    BrowserAnimationsModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireModule.initializeApp(firebaseChatConfig),
     AngularFireDatabaseModule,

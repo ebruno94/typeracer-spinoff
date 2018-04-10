@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 // import { User } from '../user.model';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { Router } from '@angular/router';
+<<<<<<< HEAD
 import { UserService } from '../user.service';
 import { AuthService } from '../auth.service';
+=======
+import { FirebaseListObservable } from 'angularfire2/database';
+>>>>>>> 39b2d4b60c1e18fa5b9e8bb45a2336b3f3aaea7a
 
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -14,20 +19,47 @@ import * as firebase from 'firebase/app';
   selector: 'app-userpanel',
   templateUrl: './user-panel.component.html',
   styleUrls: ['./user-panel.component.css'],
-  providers: [UserService]
 })
 
 export class UserPanelComponent implements OnInit {
   user: FirebaseListObservable<any[]>;
   currentRoute: string = this.router.url;
 
-  constructor(private router: Router, private userService: UserService){}
+  constructor(private router: Router){}
 
   ngOnInit(){
 
   // this. = this.showService.get();
 
-}
+  }
+
+  friends = [
+    {
+      name: "Ernest",
+      status: "Online"
+    },
+    {
+      name: "Justin",
+      status: "Offline"
+    },
+    {
+      name: "Alexander",
+      status: "Online"
+    },
+    {
+      name: "Jahmanz",
+      status: "Online"
+    },
+    {
+      name: "Tim",
+      status: "Online"
+    },
+    {
+      name: "Tyler",
+      status: "Online"
+    }
+  ]
+
 //
 //   goToUserDetailPage(clickedShow) {
 //     this.router.navigate(['', clicked.$key]);

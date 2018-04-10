@@ -17,12 +17,17 @@ const appRoutes: Routes = [
     component: UserCreateComponent
   },
   {
-    path: 'user/display',
+    path: 'user/display/:uid',
     component: UserPanelComponent
   },
   {
+<<<<<<< HEAD
     path: 'user/display',
     component: ChatComponent
+=======
+    path: 'game/create',
+    component: GameComponent
+>>>>>>> 39b2d4b60c1e18fa5b9e8bb45a2336b3f3aaea7a
   }
 
 ];
