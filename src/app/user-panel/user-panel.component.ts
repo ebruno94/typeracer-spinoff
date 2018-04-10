@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 // import { User } from '../user.model';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { Router } from '@angular/router';
 import { FirebaseListObservable } from 'angularfire2/database';
