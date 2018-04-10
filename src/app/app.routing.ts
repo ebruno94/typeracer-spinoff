@@ -12,7 +12,12 @@ const appRoutes: Routes = [
   {
     path: 'user/display',
     component: UserPanelComponent
+  },
+  {
+    path: 'Game/display',
+    component: GameComponent
   }
+
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);
