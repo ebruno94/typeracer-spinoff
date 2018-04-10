@@ -1,7 +1,2 @@
-<p>
-  game works!
-</p>
-<div id="balloons">
-  <p *ngFor="let balloon of gameService.activeBalloons | async">{{balloon.content}}</p>
-</div>
-<input #responseInput type="text" [ngModel]="responseInput.value" (ngModelChange)="gameService.checkInput(responseInput)">
+<app-game-create *ngIf="!gameIsActive" (triggerStartGame)="startGame()"></app-game-create>
+<app-game-display *ngIf="gameIsActive" [currentGame]="currentGame"></app-game-display>

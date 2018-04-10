@@ -1,38 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { GameService } from '../game.service'
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
-  styleUrls: ['./game.component.css'],
-  providers: [GameService]
+  styleUrls: ['./game.component.css']
 })
-export class GameComponent implements OnInit {
+export class GameComponent {
+  gameIsActive: boolean = false;
+  currentGame: FirebaseObjectObservable<any>;
 
-  constructor(private gameService: GameService) { }
+  constructor() { }
 
-  ngOnInit(){
-    console.log("I'm initializing!!!");
-    this.gameService.allBalloonsArray = this.gameService.database.list('allBalloonsArray');
-    this.gameService.allBalloonsArray.subscribe(data=>{
-      if (this.gameService.isHost && !this.gameService.activeBalloons)        this.gameService.allBalloonsArray.push([])
-      .then(data=>{
-        console.log("allBalloonsArray key: " + data.key);
-        this.gameService.allBalloonsArrayKey = data.key; 
-        this.gameService.getActiveBalloons(data.key);
-        this.gameService.activeBalloons.subscribe(snap=>{
-          console.log(snap);
-          console.log("activeBalloons key: " + snap.key);
-          console.log("about to add balloons");
-          if (snap.length < 5 && this.gameService.isHost) {
-            this.gameService.addBalloon();
-            console.log(this.gameService.activeBalloons);
-          }
-        });
-      });
-    });
+  startGame(myGame: FirebaseObjectObservable<any>){
+    this.gameIsActive = true;
+    this.currentGame = myGame; 
   }
-
-
 
 }
