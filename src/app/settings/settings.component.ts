@@ -22,7 +22,6 @@ export class SettingsComponent implements OnInit {
   @Input() visible: boolean;
   @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  visible: boolean;
   constructor() { }
 
   ngOnInit() {
