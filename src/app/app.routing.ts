@@ -6,6 +6,7 @@ import { ChatComponent } from './user-panel/user-panel.component';
 
 import { UserCreateComponent } from './user-create/user-create.component';
 import { GameComponent } from './game/game.component';
+import { GameDisplayComponent } from './game-display/game-display.component';
 
 const appRoutes: Routes = [
   {
@@ -30,7 +31,12 @@ const appRoutes: Routes = [
 >>>>>>> be221f5e9d67418380cb92a194d2c826cc38e243
     path: 'game/create',
     component: GameComponent
-  }
+  },
+  {
+    path: 'game/display',
+    component: GameDisplayComponent
+  },
+
 
 ];
 
