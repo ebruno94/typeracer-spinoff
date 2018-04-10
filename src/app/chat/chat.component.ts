@@ -20,6 +20,7 @@ export class ChatComponent implements OnInit {
   items: FirebaseListObservable<any[]>;
   msgVal: string = '';
   roomNumber = Math.ceil(Math.random() * 1000000);
+  editMode: boolean = false;
 
 
   constructor(public afAuth: AngularFireAuth, public af: AngularFireDatabase) {
@@ -35,6 +36,27 @@ export class ChatComponent implements OnInit {
 
   ngOnInit(){
 
+  }
+
+  setRoomNumber(num){
+    this.roomNumber = num;
+    this.editMode = !this.editMode;
+    this.loadChat();
+  }
+
+  loadChat(){
+    this.items = this.af.list('/chatrooms/'+ this.roomNumber, {
+      query: {
+        limitToLast: 50
+      }
+    });
+
+    this.user = this.afAuth.authState;
+
+  }
+
+  clickEditMode(){
+    this.editMode = !this.editMode;
   }
 
   login() {

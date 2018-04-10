@@ -1,3 +1,15 @@
+<div class="row">
+  <div class="col-md-9">
+    <label *ngIf="!editMode">You are in {{roomNumber}}</label>
+    <div *ngIf="editMode">
+      <input #blah>
+      <button type="button" class="btn" (click)="setRoomNumber(blah.value)">Done</button>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <button style="float:right" type="button" name="button" class="btn" (click)="clickEditMode()">Change Room Number</button>
+  </div>
+</div>
 <div id="details-container">
     <p *ngFor="let item of items | async" style="width: 100%">{{item.message}}</p>
 </div>
