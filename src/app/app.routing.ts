@@ -15,7 +15,7 @@ const appRoutes: Routes = [
     component: UserCreateComponent
   },
   {
-    path: 'user/display',
+    path: 'user/display/:uid',
     component: UserPanelComponent
   },
   {

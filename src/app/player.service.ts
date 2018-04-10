@@ -51,6 +51,6 @@ export class PlayerService {
   }
 
   logoutPlayer(){
-    this.currentPlayer.update({loggedIn: false}); 
+    this.currentPlayer.update({loggedIn: false});
   }
 }

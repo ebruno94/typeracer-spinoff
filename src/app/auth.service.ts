@@ -21,9 +21,11 @@ export class AuthService {
           console.log("This is the current user's uid: " + data.uid);
         })
         console.log('Success!', value);
+        return true;
       })
       .catch(err => {
         console.log('Something went wrong:',err.message);
+        return false; 
       });
   }
 
@@ -34,9 +36,11 @@ export class AuthService {
       .then(value => {
         console.log(value);
         console.log('Nice, it worked!');
+        return true;
       })
       .catch(err => {
         console.log('Something went wrong:',err.message);
+        return false;
       });
   }
 
