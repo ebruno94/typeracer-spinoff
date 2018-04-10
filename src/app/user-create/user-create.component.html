@@ -1,6 +1,3 @@
-<p>
-  user-create works!
-</p>
 <h1 *ngIf="authService.user | async">Welcome {{ (authService.user | async)?.email }}!</h1>
 
 <div *ngIf="!(authService.user | async)">

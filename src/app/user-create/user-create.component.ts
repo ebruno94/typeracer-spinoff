@@ -12,6 +12,8 @@ export class UserCreateComponent implements OnInit {
   constructor(private authService: AuthService){
 
   }
+  email;
+  password;
   signup() {
     this.authService.signup(this.email, this.password);
     this.email = this.password = ''
