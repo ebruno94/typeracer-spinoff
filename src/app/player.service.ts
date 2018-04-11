@@ -17,16 +17,13 @@ export class PlayerService {
   }
 
   loginPlayer(userId: string, username: string){
-    console.log("you are trying to give player the following username: " + username);
     let exists = false;
     this.players.subscribe(data=>{
       //checks to see if player with this userId already exists
       data.forEach(player=>{
         if (player.uid === userId) {
           exists = true;
-          console.log(player);
           this.currentPlayer = this.database.object('players'+player.$key);
-          console.log("player key is the following: " + player.$key);
           this.router.navigate(['user', 'display', player.$key]);
         }
       });
@@ -43,8 +40,6 @@ export class PlayerService {
         }
         this.players.push(newPlayer)
         .then(snap=>{
-          console.log(snap);
-          console.log("this is your new player: " + snap.key);
           this.currentPlayer = this.database.object('players/' + snap.key);
           this.router.navigate(['user', 'display', snap.key]);
         });
@@ -56,14 +51,10 @@ export class PlayerService {
     this.currentPlayer.subscribe(player=>{
       this.friends = this.database.list('players/'+player.$key+'/friends');
       this.friends.subscribe(friends=>{
-        console.log("I just subscribed to player's friends");
         this.localFriends = [];
         friends.forEach(friendKey=>{
-          console.log("I'm iterating over friends");
-          console.log("I'm searching for the following friend: " + friendKey.friendKey);
           this.localFriends.push(this.database.object('players/'+friendKey.friendKey));
           this.localFriends[this.localFriends.length-1].subscribe(friend=>{
-            console.log("This is your friend");
             console.log(friend);
           })
           console.log(this.localFriends);
@@ -76,7 +67,6 @@ export class PlayerService {
     let myFirstSubscription = this.currentPlayer.subscribe(player => {
       let myFriends = this.database.list('players/'+player.$key+'/friends');
       myFriends.push({"friendKey": friendKey});
-      console.log(this.foundPotentialFriends);
       myFirstSubscription.unsubscribe();
     })
     this.foundPotentialFriends = [];
@@ -84,13 +74,9 @@ export class PlayerService {
 
   findFriends(input: string, element){
     if (input.length >= 3){
-      console.log("this is the input we're trying to pull across" + input);
-      console.log("about to look for friends");
       let potentialFriends = [];
       this.players.subscribe(players=>{
         players.forEach(player=>{
-          console.log(player);
-          console.log("you may like" + player.username);
           if (player.username.search(input) !== -1){
             potentialFriends.push({username: player.username, key: player.$key})
           }
@@ -111,8 +97,9 @@ export class PlayerService {
     })
     this.currentGameState.subscribe(state=>{
       console.log("This is the state: " + state);
+      console.log(state); 
       if (state) {
-        this.router.navigate(['game', 'display', state])
+        this.router.navigate(['game', 'display', state.$value])
       }
     })
   }
