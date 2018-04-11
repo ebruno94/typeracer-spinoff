@@ -26,7 +26,7 @@ const appRoutes: Routes = [
     component: GameComponent
   },
   {
-    path: 'game/display',
+    path: 'game/display/:gameid',
     component: GameDisplayComponent
   },
 

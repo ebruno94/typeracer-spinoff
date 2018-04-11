@@ -37,32 +37,9 @@ export class UserPanelComponent implements OnInit {
     })
   }
 
-  friends = [
-    {
-      name: "Ernest",
-      status: "Online"
-    },
-    {
-      name: "Justin",
-      status: "Offline"
-    },
-    {
-      name: "Alexander",
-      status: "Online"
-    },
-    {
-      name: "Jahmanz",
-      status: "Online"
-    },
-    {
-      name: "Tim",
-      status: "Online"
-    },
-    {
-      name: "Tyler",
-      status: "Online"
-    }
-  ]
+  initiateNewGame(request){
+    this.queueService.initiateNewGame(request); 
+  }
 
 //
 //   goToUserDetailPage(clickedShow) {
