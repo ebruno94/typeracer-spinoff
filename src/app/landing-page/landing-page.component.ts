@@ -23,9 +23,8 @@ export class LandingPageComponent implements OnInit {
       if (snap !== null) {
         console.log("routing");
         this.playerService.loginPlayer(snap.uid, username);
-        this.router.navigate(['user', 'display', snap.uid])
       } else {
-        console.log("failed to route");
+        console.log("currentPlayer is not set!");
       }
     })
     this.email = this.password = ''

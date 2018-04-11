@@ -1,9 +1,9 @@
 <div class="container" id="UserDisplayContainer">
   <div class="row">
     <div class="col-md-7 card">
-      <h1>Name: </h1>
-      <h3>Username: </h3>
-      <h5>Win-Lose Ratio: </h5>
+      <h3>Username: {{(playerService.currentPlayer | async)?.username}} </h3>
+      <h5>Wins: {{(playerService.currentPlayer | async)?.wins}} </h5>
+      <h5>Losses: {{(playerService.currentPlayer | async)?.losses}}  </h5>
       <br><br>
       <div class="row">
         <div class="col-md-6 text-center">
@@ -15,11 +15,16 @@
       </div>
     </div>
     <div class="col-md-5 card">
+      <label for="">Search for a Friend</label>
+      <input #friendSearch type="text" [ngModel]="friendSearch.value" (ngModelChange)="playerService.findFriends(friendSearch.value, potentialFriends)">
+      <ul #potentialFriends>
+        <li *ngFor="let friend of playerService.foundPotentialFriends">{{friend.username}}<button class="btn" style="float: right" (click)="playerService.addFriend(friend.key)">Add Friend</button></li>
+      </ul>
       <h1>Friends List</h1>
       <div class="card" id="friendCard">
-        <div *ngFor="let friend of friends">
-          <p>{{friend.name}}</p>
-          <p>{{friend.status}}</p>
+        <div *ngFor="let friend of playerService.localFriends">
+          <p>{{(friend | async)?.username}}</p>
+          <button type="button" class="btn" (click)="requestGame(friend.$key)">Send Game Request</button>
           <hr>
         </div>
       </div>
