@@ -24,7 +24,9 @@
       <div class="card" id="friendCard">
         <div *ngFor="let friend of playerService.localFriends">
           <p>{{(friend | async)?.username}}</p>
-          <button type="button" class="btn" (click)="requestGame(friend.$key)">Send Game Request</button>
+          <p>{{(friend | async)?.$key}}</p>
+          <input #friendKey type="hidden" value="{{(friend | async)?.$key}}">
+          <button type="button" class="btn" (click)="queueService.requestGame(uid, friendKey.value)">Send Game Request</button>
           <hr>
         </div>
       </div>
@@ -54,3 +56,9 @@
   <hr>
   <button style="float: right" type="button" class="btn" (click)="showDialog = !showDialog">Close</button>
 </app-settings>
+
+<div *ngFor="let request of playerService.ourGameRequests | async">
+  <p>{{request.requestor}}</p>
+  <p>{{request.requestee}}</p>
+  <button type="button" class="btn" (click)="initiateNewGame(request)">Play Game!</button>
+</div>

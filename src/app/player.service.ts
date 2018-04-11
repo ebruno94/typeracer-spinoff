@@ -9,6 +9,8 @@ export class PlayerService {
   friends: FirebaseListObservable<any>;
   localFriends = [];
   foundPotentialFriends = [];
+  ourGameRequests: FirebaseListObservable<any>;
+  currentGameState: FirebaseObjectObservable<any>;
 
   constructor(private database: AngularFireDatabase, private router: Router) {
     this.players = this.database.list('players');
@@ -33,6 +35,7 @@ export class PlayerService {
         let newPlayer = {
           uid: userId,
           username: username,
+          currentGame: null,
           friends: ['-L9pvPqJsuCRjNvbPf-g'], //an array of friend keys
           wins: 0,
           losses: 0,
@@ -101,10 +104,28 @@ export class PlayerService {
 
   setPlayer(key){
     this.currentPlayer = this.database.object('players/' + key);
+    this.currentGameState = this.database.object('players/'+key+'/currentGame');
     this.currentPlayer.subscribe(player=>{
-      console.log("You just set the current player!");
-      console.log(player);
+      this.ourGameRequests = this.database.list('players/'+key+'/requests/');
       this.getFriends();
+    })
+    this.currentGameState.subscribe(state=>{
+      console.log("This is the state: " + state); 
+      if (state) {
+        this.router.navigate(['game', 'display', state])
+      }
+    })
+  }
+
+  setGameIds(gameId){
+    let currentGame = this.database.object('allGames/'+gameId);
+    currentGame.subscribe(game=>{
+      let player1Id = game.requestor;
+      let player2Id = game.requestee;
+      let player1 = this.database.object('players/'+player1Id);
+      let player2 = this.database.object('players/'+player2Id);
+      player1.update({currentGame: gameId});
+      player2.update({currentGame: gameId});
     })
   }
 

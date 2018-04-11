@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GameService } from '../game.service'
 import {ViewChild, Input} from "@angular/core";
+import { PlayerService } from '../player.service';
 
 // class Balloon {
 //   score: number;
@@ -13,10 +14,10 @@ import {ViewChild, Input} from "@angular/core";
   selector: 'app-game-display',
   templateUrl: './game-display.component.html',
   styleUrls: ['./game-display.component.css'],
-  providers: [ GameService ]
+  providers: [GameService, PlayerService]
 })
-
 export class GameDisplayComponent implements OnInit {
+
   @Input() currentGame;
   @ViewChild("myCanvas") myCanvas;
   balloonLocationArr: Array<Object> = [];

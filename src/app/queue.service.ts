@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { Router } from '@angular/router';
+
 
 @Injectable()
 export class QueueService {
@@ -8,8 +10,10 @@ export class QueueService {
   myGame: FirebaseObjectObservable<any>;
   queueTimer: number = 0;
   activeGame: boolean = false;
+  prospectiveOpponentRequests: FirebaseListObservable<any>;
+  ourRequests: FirebaseListObservable<any>;
 
-  constructor(private database: AngularFireDatabase) {
+  constructor(private database: AngularFireDatabase, private router: Router) {
     this.allGames = this.database.list('allGames');
   }
 
@@ -28,4 +32,33 @@ export class QueueService {
     })
   }
 
+  initiateNewGame(request){
+    let myNewGame = {
+      player1: request.requestor, //**Fill with current player ID
+      player2: request.requestee,
+      balloonsArrayKey: null,
+      player1Score: 0,
+      player2Score: 0,
+      time: 60
+    }
+    this.allGames.push(myNewGame)
+    .then(snap=>{
+      console.log("This is your game key: " + snap.key);
+      this.router.navigate(['game', 'display', snap.key])
+    })
+  }
+
+  requestGame(playerKey, opponentKey){
+    this.prospectiveOpponentRequests = this.database.list('players/'+opponentKey+'/requests');
+    let firstSubscription = this.prospectiveOpponentRequests.subscribe(opponent=>{
+      this.prospectiveOpponentRequests.push({requestor: playerKey, requestee: opponentKey});
+      firstSubscription.unsubscribe();
+    })
+    console.log("about to add request to my queue");
+    this.ourRequests = this.database.list('players/'+playerKey+'/requests/');
+    let secondSubscription = this.ourRequests.subscribe(me=>{
+      this.ourRequests.push({"requestor": playerKey, "requestee": opponentKey});
+      secondSubscription.unsubscribe();
+    })
+  }
 }
