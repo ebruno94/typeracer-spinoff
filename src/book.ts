@@ -11,7 +11,7 @@ preservation of the poems--the unassisted memory of reciters being neither
 sufficient nor trustworthy. But here we only escape a smaller difficulty
 by running into a greater; for the existence of trained bards, gifted with
 extraordinary memory, (25) is far less astonishing than that of long
-manuscripts, in an age essentially non-reading and non-writing, and when
+manuscripts, in an age essentially non-reading and non-writing, and whenng
 even suitable instruments and materials for the process are not obvious.
 Moreover, there is a strong positive reason for believing that the bard
 was under no necessity of refreshing his memory by consulting a
