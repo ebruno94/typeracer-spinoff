@@ -5,6 +5,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 
+import { PlayerService } from './../player.service';
+
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from 'rxjs/Observable';
@@ -20,16 +22,12 @@ export class UserPanelComponent implements OnInit {
   user: FirebaseListObservable<any[]>;
   currentRoute: string = this.router.url;
 
-  constructor(private router: Router){}
+  constructor(private router: Router, ){}
 
   ngOnInit(){
 
   // this. = this.showService.get();
 
-  }
-
-  startGame(){
-    this.router.navigate(['game', 'create']);
   }
 
   friends = [

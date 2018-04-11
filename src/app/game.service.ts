@@ -78,7 +78,7 @@ export class GameService {
   //   this.activeBalloons.push(newBalloon);
   // };
   addBalloon(){
-<<<<<<< HEAD
+
     this.newBalloons(0);
       let newBalloon = {
         score: 0,
@@ -100,8 +100,7 @@ export class GameService {
   //Used to generate allLocalSentences content for host from book selected.
   newBalloons(bookNumber){
     this.allLocalSentences = BOOK.book[bookNumber].content.match( /[^\.!\?]+[\.!\?]+/g );
-  }
-=======
+
     let newBalloon = {
       score: 0,
       content: ''
@@ -147,7 +146,6 @@ export class GameService {
     this.activeBalloons.push(newBalloon);
     return newBalloon;
   };
->>>>>>> 243197c6a7fceefece4254c78337a2f1eae07ed8
 
   checkInput(element){
     //console.log("changing");
@@ -165,9 +163,9 @@ export class GameService {
   //        console.log("You matched a balloon!!!!");
           completedBalloon = balloon.$key;
   //        console.log(balloon.$key);
-      }
+        }
+      })
     })
-  })
 
     if (hasMatch) {
       e.style.color = 'green';
