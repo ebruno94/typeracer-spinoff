@@ -92,15 +92,13 @@ export class PlayerService {
     this.currentPlayer = this.database.object('players/' + key);
     this.currentGameState = this.database.object('players/'+key+'/currentGame');
     this.currentPlayer.subscribe(player=>{
+      console.log("This is the state: " + player.currentGame);
+      console.log(player.currentGame);
+      if (player.currentGame) {
+        this.router.navigate(['game', 'display', player.currentGame])
+      }
       this.ourGameRequests = this.database.list('players/'+key+'/requests/');
       this.getFriends();
-    })
-    this.currentGameState.subscribe(state=>{
-      console.log("This is the state: " + state);
-      console.log(state); 
-      if (state) {
-        this.router.navigate(['game', 'display', state.$value])
-      }
     })
   }
 
