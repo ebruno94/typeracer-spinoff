@@ -12,7 +12,7 @@
         <input type="password" [(ngModel)]="password" placeholder="password">
         <br>
 
-        <button (click)="signup(username)" [disabled]="!userName || !email || !password">
+        <button (click)="signup(username.value)" [disabled]="!userName || !email || !password">
           Signup
         </button>
         <br>
