@@ -50,6 +50,7 @@ export class GameDisplayComponent implements OnInit {
     });
     this.createCanvas();
     this.gameService.incrementTime();
+    // setTimeout(this.playerService.checkIfInGame, 2000); 
   }
   drawBalloon(c, balloon, i, w, h, t){
     c.fillStyle = "#ffffff"

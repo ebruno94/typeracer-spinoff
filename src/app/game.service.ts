@@ -20,13 +20,9 @@ export class GameService {
   currentTime: number = 60;
 
   setActiveGame(gameId){
-    console.log("I'm setting active game");
-    console.log("I'm setting active game to: " + gameId);
     this.activeGame = this.database.object('allGames/'+gameId);
     this.currentTimeObservable = this.database.object('allGames/'+gameId+'/time');
     this.currentTimeObservable.subscribe(time=>{
-      console.log("the received time subscription is: " + time);
-      console.log(time);
       this.currentTime = time.$value;
     })
   }
