@@ -93,24 +93,18 @@ export class PlayerService {
     this.currentGameState = this.database.object('players/'+key+'/currentGame');
     this.currentPlayer.subscribe(player=>{
       console.log("This is the state: " + player.currentGame);
-      console.log(player.currentGame);
       this.ourGameRequests = this.database.list('players/'+key+'/requests/');
-      this.getFriends();
     })
   }
 
   setGameIds(gameId){
-    console.log("setting Game Ids");
     let currentGame = this.database.object('allGames/'+gameId);
     currentGame.subscribe(game=>{
       let player1Id = game.player1;
       let player2Id = game.player2;
-      console.log(game);
-      console.log("player1Id: " + player1Id);
       let player1 = this.database.object('players/'+player1Id);
       let player2 = this.database.object('players/'+player2Id);
       player1.update({currentGame: gameId});
-      console.log("trying to update gameIds");
       player2.update({currentGame: gameId});
     })
   }

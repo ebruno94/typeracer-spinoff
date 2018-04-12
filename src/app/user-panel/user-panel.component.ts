@@ -36,6 +36,7 @@ export class UserPanelComponent implements OnInit {
       this.uid = parameter['uid'];
       console.log("This is the playerKey from the list of route parameters: " + this.uid);
       this.playerService.setPlayer(this.uid);
+      this.playerService.getFriends(); 
       this.playerService.currentGameState.subscribe(state=>{
         console.log("This is the state: " + state);
         console.log(state.$value);
