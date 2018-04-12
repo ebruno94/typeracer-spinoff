@@ -7,11 +7,11 @@
   <!-- <p *ngFor="let balloon of gameService.activeBalloons | async; let i = index"><span data-dummy="drawBalloon(balloon,i)"></span></p> -->
 </div>
 
-<div id="balloons">
+<!-- <div id="balloons">
   <p *ngFor="let balloon of gameService.activeBalloons | async">{{balloon.content}}</p>
-</div>
+</div> -->
 
 <button (click)="tester(5)" [disabled]="!userName || !email || !password">
-  Signup
+  Enter text here:
 </button>
 <input #responseInput type="text" [ngModel]="responseInput.value" (ngModelChange)="gameService.checkInput(responseInput)">
