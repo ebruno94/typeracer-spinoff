@@ -33,7 +33,6 @@ export class QueueService {
   }
 
   cleanGames(){
-    console.log("about to clean");
     this.allGames.subscribe(allGames=>{
       allGames.forEach(game=>{
         if (Date.now()-game.timeCreated > 90000){
@@ -43,7 +42,10 @@ export class QueueService {
           let player2 = this.database.object('players/'+game.player2);
           player1.update({currentGame: -1});
           player2.update({currentGame: -1});
+<<<<<<< HEAD
           console.log(game.$key);
+=======
+>>>>>>> 9f137eece49bb84355cbbc0afe3cee0e3dda2ee6
           this.database.object('allGames/'+game.$key).remove();
         }
       })
@@ -60,16 +62,13 @@ export class QueueService {
       time: 60,
       timeCreated: Date.now()
     }
-    console.log("current Time: " + Date.now());
     this.allGames.push(myNewGame)
     .then(snap=>{
-      console.log("This is your game key: " + snap.key);
       this.router.navigate(['game', 'display', snap.key])
     })
   }
 
   iterateRequestTimers(){
-    console.log("iterating timer");
     this.ourRequests.forEach(request=>{
       let thisSubscription = request.subscribe(request=>{
         let currentTime = request.requestTime;
@@ -86,7 +85,6 @@ export class QueueService {
       firstSubscription.unsubscribe();
     })
 
-    console.log("about to add request to my queue");
     this.ourRequests = this.database.list('players/'+playerKey+'/requests/');
     setTimeout(this.iterateRequestTimers, 1000);
     let secondSubscription = this.ourRequests.subscribe(me=>{

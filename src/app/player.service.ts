@@ -67,9 +67,7 @@ export class PlayerService {
         friends.forEach(friendKey=>{
           this.localFriends.push(this.database.object('players/'+friendKey.friendKey));
           this.localFriends[this.localFriends.length-1].subscribe(friend=>{
-            console.log(friend);
           })
-          console.log(this.localFriends);
         });
       })
     })
@@ -128,5 +126,6 @@ export class PlayerService {
 
   logoutPlayer(){
     this.currentPlayer.update({loggedIn: false});
+    this.router.navigate(['']);
   }
 }

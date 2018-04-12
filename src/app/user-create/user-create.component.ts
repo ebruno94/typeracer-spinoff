@@ -21,14 +21,15 @@ export class UserCreateComponent implements OnInit {
     this.authService.signup(this.email, this.password);
     this.authService.user.subscribe(snap=>{
       if (snap !== null) {
-        console.log("routing");
         this.playerService.loginPlayer(snap.uid, username);
-      } else {
-        console.log("failed to route");
       }
     })
     this.email = this.password = ''
 
+  }
+
+  toLogin(){
+    this.router.navigate(['']);
   }
   ngOnInit(){}
 

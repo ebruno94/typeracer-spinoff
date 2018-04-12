@@ -1,17 +1,18 @@
 <div class="row">
   <div class="col-md-9">
-    <label *ngIf="!editMode">You are in {{roomNumber}}</label>
+    <h2 *ngIf="!editMode">You are in {{roomNumber}}</h2>
     <div *ngIf="editMode">
       <input #blah>
       <button type="button" class="btn" (click)="setRoomNumber(blah.value)">Done</button>
     </div>
   </div>
+  <br>
   <div class="col-md-3">
     <button style="float:right" type="button" name="button" class="btn" (click)="clickEditMode()">Change Room Number</button>
   </div>
 </div>
 <div id="details-container">
-    <p *ngFor="let item of items | async" style="width: 100%">{{item.message}}</p>
+  <div *ngFor="let item of items | async"  class="card"><h4>{{item.message}}</h4><br></div>
 </div>
 <hr>
 <input type="text" id="message" *ngIf="(user | async)?.uid" placeholder="Type your message here! Press Enter to Submit!" (keyup.enter)="Send($event.target.value)" [(ngModel)]="msgVal" />
