@@ -1,17 +1,37 @@
-<p>
-  game works!
-</p>
-<div id="balloons">
-  <!-- <p *ngFor="let balloon of gameService.activeBalloons | async">{{balloon.content}}</p> -->
-  <canvas #myCanvas width="1500" height="800" style="background:#CCFFFF;"></canvas>
-  <!-- <p *ngFor="let balloon of gameService.activeBalloons | async; let i = index"><span data-dummy="drawBalloon(balloon,i)"></span></p> -->
-</div>
+<div class="container" id="gameContainer">
+  <div class="text-center">
 
-<div id="balloons">
-  <p *ngFor="let balloon of gameService.activeBalloons | async">{{balloon.content}}</p>
-</div>
+    <div class="row">
+      <div class="col-md-4">
+        <p>Player 1 Score</p>
+      </div>
+      <div class="col-md-4">
+        <p>Timer</p>
+      </div>
+      <div class="col-md-4">
+        <p>Player 2 Score</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <h4>{{gameService.activeGame.player1Score}}</h4>
+      </div>
+      <div class="col-md-4">
+        <h4>{{gameService.currentTime}}</h4>
+      </div>
+      <div class="col-md-4">
+        <h4>{{gameService.activeGame.player2Score}}</h4>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div id="balloons">
+    <!-- <p *ngFor="let balloon of gameService.activeBalloons | async">{{balloon.content}}</p> -->
+    <canvas #myCanvas width="1500" height="800" style="background:#CCFFFF;"></canvas>
+    <!-- <p *ngFor="let balloon of gameService.activeBalloons | async; let i = index"><span data-dummy="drawBalloon(balloon,i)"></span></p> -->
+  </div>
+  <br>
+  <h5 class="text-center">Type here!</h5>
+  <input #responseInput type="text" [ngModel]="responseInput.value" (ngModelChange)="gameService.checkInput(responseInput)">
 
-<button (click)="tester(5)" [disabled]="!userName || !email || !password">
-  Signup
-</button>
-<input #responseInput type="text" [ngModel]="responseInput.value" (ngModelChange)="gameService.checkInput(responseInput)">
+</div>

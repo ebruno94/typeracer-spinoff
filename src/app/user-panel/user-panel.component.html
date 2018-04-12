@@ -12,6 +12,7 @@
           <div *ngFor="let request of playerService.ourGameRequests | async">
             <p>User{{request.requestor}} wants to play with you!</p>
             <button type="button" class="btn" (click)="initiateNewGame(request)">Play Game!</button>
+            <hr>
           </div>
         </div>
       </div>
@@ -23,6 +24,9 @@
           <button type="button" class="btn" (click)="authService.logout(); playerService.logoutPlayer()">LOGOUT</button>
         </div>
       </div>
+    </div>
+    <div class="col-sm-1">
+
     </div>
     <div class="col-md-5 card">
       <h1>Friends List</h1>

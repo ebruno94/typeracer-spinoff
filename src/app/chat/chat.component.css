@@ -35,6 +35,9 @@ input#message {
   width: 90%;
   height: 50px;
   padding: 20px;
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
 }
 
 img {
