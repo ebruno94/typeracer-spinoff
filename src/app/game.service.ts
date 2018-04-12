@@ -39,7 +39,8 @@ export class GameService {
     this.newBalloons(0);
       let newBalloon = {
         score: 0,
-        content: ''
+        content: '',
+        createdTime: 60
       };
       //Pick a randomSentence from allLocalballoons
       //Change this function later on
