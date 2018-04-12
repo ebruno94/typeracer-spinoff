@@ -33,7 +33,6 @@ export class PlayerService {
           uid: userId,
           username: username,
           currentGame: null,
-          friends: ['-L9pvPqJsuCRjNvbPf-g'], //an array of friend keys
           wins: 0,
           losses: 0,
           loggedIn: true
@@ -77,13 +76,15 @@ export class PlayerService {
       let potentialFriends = [];
       this.players.subscribe(players=>{
         players.forEach(player=>{
-          console.log("reading player.username: " + player.username); 
+          console.log("reading player.username: " + player.username);
           if (player.username.search(input) !== -1){
             potentialFriends.push({username: player.username, key: player.$key})
           }
         })
         this.foundPotentialFriends = potentialFriends;
       })
+    } else {
+      this.foundPotentialFriends = [];
     }
   }
 
