@@ -16,21 +16,16 @@
       </div>
     </div>
     <div class="col-md-5 card">
-      <label for="">Search for a Friend</label>
-      <input #friendSearch type="text" [ngModel]="friendSearch.value" (ngModelChange)="playerService.findFriends(friendSearch.value, potentialFriends)">
-      <ul #potentialFriends>
-        <li *ngFor="let friend of playerService.foundPotentialFriends">{{friend.username}}<button class="btn" style="float: right" (click)="playerService.addFriend(friend.key)">Add Friend</button></li>
-      </ul>
       <h1>Friends List</h1>
       <div class="card" id="friendCard">
         <div *ngFor="let friend of playerService.localFriends">
           <p>{{(friend | async)?.username}}</p>
-          <p>{{(friend | async)?.$key}}</p>
           <input #friendKey type="hidden" value="{{(friend | async)?.$key}}">
           <button type="button" class="btn" (click)="queueService.requestGame(uid, friendKey.value)">Send Game Request</button>
           <hr>
         </div>
       </div>
+      <button class="btn" (click)="showFriendSearch = !showFriendSearch">Friend Search</button>
       <!-- <div *ngFor="let friend of friends">
         <h4>{{friend.name}}</h4>
         <p>{{friend.status}}</p>
@@ -47,6 +42,7 @@
   </div>
 </div>
 
+
 <app-settings [(visible)]="showDialog">
   <h1>Settings</h1>
   <hr>
@@ -57,6 +53,18 @@
   <hr>
   <button style="float: right" type="button" class="btn" (click)="showDialog = !showDialog">Close</button>
 </app-settings>
+
+<app-settings [(visible)]="showFriendSearch">
+  <label>Search for a Friend</label>
+  <input #friendSearch type="text" [ngModel]="friendSearch.value" (ngModelChange)="playerService.findFriends(friendSearch.value, potentialFriends)">
+  <div class="card" style="height: 150px; overflow-y: scroll;">
+    <ul #potentialFriends>
+      <li *ngFor="let friend of playerService.foundPotentialFriends">{{friend.username}}<button class="btn" style="float: right" (click)="playerService.addFriend(friend.key)">Add Friend</button></li>
+    </ul>
+  </div>
+  <button style="float: right" type="button" class="btn" (click)="showFriendSearch = !showFriendSearch">Close</button>
+<app-settings>
+
 
 <div *ngFor="let request of playerService.ourGameRequests | async">
   <p>{{request.requestor}}</p>
