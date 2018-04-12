@@ -48,16 +48,29 @@ export class QueueService {
     })
   }
 
+  iterateRequestTimers(){
+    console.log("iterating timer");
+    this.ourRequests.forEach(request=>{
+      let thisSubscription = request.subscribe(request=>{
+        let currentTime = request.requestTime;
+        request.update({requestTime: currentTime-1})
+        thisSubscription.unsubscribe();
+      })
+    })
+  }
+
   requestGame(playerKey, opponentKey){
     this.prospectiveOpponentRequests = this.database.list('players/'+opponentKey+'/requests');
     let firstSubscription = this.prospectiveOpponentRequests.subscribe(opponent=>{
-      this.prospectiveOpponentRequests.push({requestor: playerKey, requestee: opponentKey});
+      this.prospectiveOpponentRequests.push({requestor: playerKey, requestee: opponentKey, requestTime: 30});
       firstSubscription.unsubscribe();
     })
+    
     console.log("about to add request to my queue");
     this.ourRequests = this.database.list('players/'+playerKey+'/requests/');
+    setTimeout(this.iterateRequestTimers, 1000);
     let secondSubscription = this.ourRequests.subscribe(me=>{
-      this.ourRequests.push({"requestor": playerKey, "requestee": opponentKey});
+      this.ourRequests.push({"requestor": playerKey, "requestee": opponentKey, requestTime: 30});
       secondSubscription.unsubscribe();
     })
   }
