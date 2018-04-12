@@ -20,21 +20,22 @@ export class GameService {
   currentTime: number = 60;
 
   setActiveGame(gameId){
-    console.log("I'm setting active game");
-    console.log("I'm setting active game to: " + gameId);
+    // console.log("I'm setting active game");
+    // console.log("I'm setting active game to: " + gameId);
     this.activeGame = this.database.object('allGames/'+gameId);
     this.currentTimeObservable = this.database.object('allGames/'+gameId+'/time');
     this.currentTimeObservable.subscribe(time=>{
-      console.log("the received time subscription is: " + time);
-      console.log(time);
+      // console.log("the received time subscription is: " + time);
+      // console.log(time);
       this.currentTime = time.$value;
     })
   }
 
   incrementTime = ()=>{
-    if (this.currentTime > 0){
-      this.activeGame.update({time: this.currentTime-1});
-      setTimeout(this.incrementTime, 1000);
+    if (this.currentTime > 1){
+      this.activeGame.update({time: this.currentTime-0.1});
+      // console.log(this.currentTime/10);
+      setTimeout(this.incrementTime, 100);
     }
   }
 
@@ -56,11 +57,17 @@ export class GameService {
     this.activeBalloons.remove(balloonKey);
   }
   addBalloon(){
-
+    let inputTime = this.currentTime;
+    if(this.currentTime > 2){
+      inputTime = this.currentTime;
+    } else {
+      inputTime = 0;
+    }
     let newBalloon = {
       score: 0,
       content: '',
       createdTime: this.currentTime
+
     };
     //Pick a randomSentence from allLocalballoons
     //Change this function later on
