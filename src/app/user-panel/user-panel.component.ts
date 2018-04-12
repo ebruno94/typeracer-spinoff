@@ -34,14 +34,9 @@ export class UserPanelComponent implements OnInit {
     this.queueService.cleanGames();
     this.route.params.forEach(parameter=>{
       this.uid = parameter['uid'];
-      console.log("This is the playerKey from the list of route parameters: " + this.uid);
       this.playerService.setPlayer(this.uid);
       this.playerService.currentGameState.subscribe(state=>{
-        console.log("This is the state: " + state);
-        console.log(state.$value);
-        console.log(state.$value !== -1);
         if (state.$value !== -1) {
-          console.log("My state value is:" + state.$value)
           this.router.navigate(['game', 'display', state.$value]);
           window.location.reload();
         }

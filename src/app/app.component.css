@@ -3,3 +3,16 @@
   padding: 50px;
   border: 3px solid black;
 }
+
+.footer {
+  position: fixed;
+  height: 40px;
+  background-color: #0d1a23;
+  bottom: 0px;
+  left: 0px;
+  right:0px;
+  margin-bottom:0px;
+  text-align: center;
+  color: white;
+  font-size: 18px;
+}
