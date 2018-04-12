@@ -30,6 +30,10 @@ export class UserCreateComponent implements OnInit {
     this.email = this.password = ''
 
   }
+
+  toLogin(){
+    this.router.navigate(['']);
+  }
   ngOnInit(){}
 
 }

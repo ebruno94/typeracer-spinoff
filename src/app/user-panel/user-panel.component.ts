@@ -27,7 +27,7 @@ export class UserPanelComponent implements OnInit {
   currentRoute: string = this.router.url;
   uid: string;
 
-  constructor(private router: Router, private route: ActivatedRoute, private location: Location, private playerService: PlayerService, private queueService: QueueService){}
+  constructor(private router: Router, private route: ActivatedRoute, private location: Location, private playerService: PlayerService, private queueService: QueueService, private authService: AuthService){}
 
   ngOnInit(){
     this.route.params.forEach(parameter=>{
@@ -39,7 +39,7 @@ export class UserPanelComponent implements OnInit {
         console.log(state.$value);
         if (state.$value) {
           this.router.navigate(['game', 'display', state.$value]);
-          window.location.reload(); 
+          window.location.reload();
         }
       })
     })

@@ -1,16 +1,17 @@
 <div class="container" id="UserDisplayContainer">
+  <h1 class="text-center" style="text-transform: uppercase">WELCOME, {{(playerService.currentPlayer | async)?.username}} !!</h1>
+  <br>
   <div class="row">
     <div class="col-md-7 card">
-      <h3>Username: {{(playerService.currentPlayer | async)?.username}} </h3>
       <h5>Wins: {{(playerService.currentPlayer | async)?.wins}} </h5>
       <h5>Losses: {{(playerService.currentPlayer | async)?.losses}}  </h5>
       <br><br>
       <div class="row">
         <div class="col-md-6 text-center">
-          <button type="button" class="btn" (click)="startGame()">Play!</button>
+          <button type="button" class="btn" (click)="showDialog = !showDialog">User Settings</button>
         </div>
         <div class="col-md-6 text-center">
-          <button type="button" class="btn" (click)="showDialog = !showDialog">User Settings</button>
+          <button type="button" class="btn" (click)="authService.logout(); playerService.logoutPlayer()">LOGOUT</button>
         </div>
       </div>
     </div>

@@ -14,17 +14,19 @@ export class LandingPageComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router, private playerService: PlayerService) { }
   email: string;
   password: string;
+  username: string;
   ngOnInit() {
+    this.authService.user.subscribe(user =>{
+      this.playerService.loginPlayer(user.uid, this.username);
+    })
   }
 
   login(username: string) {
     this.authService.login(this.email, this.password)
     this.authService.user.subscribe(snap=>{
       if (snap !== null) {
-        console.log("routing");
+        this.username = username;
         this.playerService.loginPlayer(snap.uid, username);
-      } else {
-        console.log("currentPlayer is not set!");
       }
     })
     this.email = this.password = ''

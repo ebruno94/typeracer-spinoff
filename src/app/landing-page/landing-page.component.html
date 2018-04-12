@@ -1,27 +1,33 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <p> Landing page works </p>
-      <h1 *ngIf="authService.user | async">Welcome {{ (authService.user | async)?.email }}!</h1>
+      <div *ngIf="authService.user | async">
+        <!-- <h1>Welcome {{ (authService.user | async)?.email }}!</h1>
+        <button (click)="logout()" class="btn">Logout</button> -->
+      </div>
 
       <div *ngIf="!(authService.user | async)">
+        <div class="text-center">
+          <h1>WELCOME TO A TYPERACER SPINOFF</h1>
+        </div>
+        <hr>
+        <h1 class="text-center">Login</h1>
         <input type="text" [(ngModel)]="email" placeholder="email">
         <br>
         <input type="password" [(ngModel)]="password" placeholder="password">
         <br>
+        <div class="row">
+          <div class="col-md-6 text-center">
+            <button class="btn" (click)="login()" [disabled]="!email || !password">Login</button>
 
-        <button (click)="login()" [disabled]="!email || !password">
-          Login
-        </button>
-        <br>
-        <a href="/user/create"><button>
-          Register
-        </button></a>
+          </div>
+          <div class="col-md-6 text-center">
+            <a href="/user/create"><button class="btn">
+              Register
+            </button></a>
+          </div>
+        </div>
       </div>
-
-      <button (click)="logout()" *ngIf="authService.user | async">
-        Logout
-      </button>
     </div>
   </div>
 </div>
