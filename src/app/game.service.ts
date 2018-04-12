@@ -20,21 +20,22 @@ export class GameService {
   currentTime: number = 60;
 
   setActiveGame(gameId){
-    console.log("I'm setting active game");
-    console.log("I'm setting active game to: " + gameId);
+    // console.log("I'm setting active game");
+    // console.log("I'm setting active game to: " + gameId);
     this.activeGame = this.database.object('allGames/'+gameId);
     this.currentTimeObservable = this.database.object('allGames/'+gameId+'/time');
     this.currentTimeObservable.subscribe(time=>{
-      console.log("the received time subscription is: " + time);
-      console.log(time);
+      // console.log("the received time subscription is: " + time);
+      // console.log(time);
       this.currentTime = time.$value;
     })
   }
 
   incrementTime = ()=>{
-    if (this.currentTime > 0){
-      this.activeGame.update({time: this.currentTime-1});
-      setTimeout(this.incrementTime, 1000);
+    if (this.currentTime > 1){
+      this.activeGame.update({time: this.currentTime-0.1});
+      // console.log(this.currentTime/10);
+      setTimeout(this.incrementTime, 100);
     }
   }
 
@@ -45,22 +46,28 @@ export class GameService {
   popBalloon(balloonKey){
     let poppedBalloon;
     this.activeBalloons.subscribe(data=>{
-      // data.forEach(balloon=>{
-      //   if (balloon.$key === balloonKey) {
-      //     // this.activeGame[this.whichPlayer]+=balloon.score;
-      //   }
-      // });
+      data.forEach(balloon=>{
+        if (balloon.$key === balloonKey) {
+          this.activeGame[this.whichPlayer]+=balloon.score;
+        }
+      });
     })
 //    console.log("AllBalloonsArray: " + this.allBalloonsArrayKey)
 //    console.log(balloonKey);
     this.activeBalloons.remove(balloonKey);
   }
   addBalloon(){
-
+    let inputTime = this.currentTime;
+    if(this.currentTime > 2){
+      inputTime = this.currentTime;
+    } else {
+      inputTime = 0;
+    }
     let newBalloon = {
       score: 0,
       content: '',
       createdTime: this.currentTime
+
     };
     //Pick a randomSentence from allLocalballoons
     //Change this function later on
@@ -79,8 +86,8 @@ export class GameService {
     this.allLocalSentences = BOOK.book[bookNumber].content.match( /[^\.!\?]+[\.!\?]+/g );
     //Non intelligently. Truncate string to 180
     for(var i = 0; i < this.allLocalSentences.length; i ++){
-      if(this.allLocalSentences[i].length > 180){
-        this.allLocalSentences[i] = this.allLocalSentences[i].slice(0,180);
+      if(this.allLocalSentences[i].length > 60){
+        this.allLocalSentences[i] = this.allLocalSentences[i].slice(0,60);
       }
     }
     // let newBalloon = {
