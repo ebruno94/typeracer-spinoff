@@ -37,7 +37,7 @@ export class UserPanelComponent implements OnInit {
       this.playerService.currentGameState.subscribe(state=>{
         console.log("This is the state: " + state);
         console.log(state.$value);
-        if (state) {
+        if (state.$value) {
           this.router.navigate(['game', 'display', state.$value])
         }
       })
