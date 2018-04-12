@@ -14,7 +14,6 @@ export class GameDisplayComponent implements OnInit {
   @ViewChild("myCanvas") myCanvas;
   balloonLocationArr: Array<Object> = [];
   context:CanvasRenderingContext2D;
-  currentTime: number = 10;
 
   constructor(private gameService: GameService, private playerService: PlayerService, private route: ActivatedRoute, private router: Router) { }
 
@@ -26,6 +25,9 @@ export class GameDisplayComponent implements OnInit {
       this.currentGameId = parameter['gameid'];
       console.log(this.currentGameId);
     })
+    this.gameService.setActiveGame(this.currentGameId);
+
+    this.gameService.newBalloons(0);
 
     this.playerService.setGameIds(this.currentGameId);
 
@@ -38,10 +40,7 @@ export class GameDisplayComponent implements OnInit {
         this.gameService.allBalloonsArrayKey = data.key;
         this.gameService.getActiveBalloons(data.key);
         this.gameService.activeBalloons.subscribe(snap=>{
-          console.log(snap);
           this.balloonLocationArr = snap;
-          console.log("activeBalloons key: " + snap.key);
-          console.log("about to add balloons");
           if (snap.length < 5 && this.gameService.isHost) {
             this.gameService.addBalloon();
             console.log(this.gameService.activeBalloons);
@@ -50,6 +49,7 @@ export class GameDisplayComponent implements OnInit {
       });
     });
     this.createCanvas();
+    this.gameService.incrementTime();
   }
   drawBalloon(c, balloon, i, w, h, t){
     c.fillStyle = "#ffffff"
@@ -68,13 +68,13 @@ export class GameDisplayComponent implements OnInit {
   generateAllBalloons(c){
     setInterval(()=>{
       if(this.balloonLocationArr.length===5){
-        console.log(this.balloonLocationArr[0]);
+        // console.log(this.balloonLocationArr[0]);
         c.clearRect(0, 0, 1500, 800);
-        this.drawBalloon(c, this.balloonLocationArr[0], 0, 1500, 800, this.currentTime);
-        this.drawBalloon(c, this.balloonLocationArr[1], 1, 1500, 800, this.currentTime);
-        this.drawBalloon(c, this.balloonLocationArr[2], 2, 1500, 800, this.currentTime);
-        this.drawBalloon(c, this.balloonLocationArr[3], 3, 1500, 800, this.currentTime);
-        this.drawBalloon(c, this.balloonLocationArr[4], 4, 1500, 800, this.currentTime);
+        this.drawBalloon(c, this.balloonLocationArr[0], 0, 1500, 800, this.gameService.currentTime);
+        this.drawBalloon(c, this.balloonLocationArr[1], 1, 1500, 800, this.gameService.currentTime);
+        this.drawBalloon(c, this.balloonLocationArr[2], 2, 1500, 800, this.gameService.currentTime);
+        this.drawBalloon(c, this.balloonLocationArr[3], 3, 1500, 800, this.gameService.currentTime);
+        this.drawBalloon(c, this.balloonLocationArr[4], 4, 1500, 800, this.gameService.currentTime);
         }
       }, 50);
 

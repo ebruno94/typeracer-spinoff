@@ -35,7 +35,9 @@ export class QueueService {
   cleanGames(){
     this.allGames.subscribe(allGames=>{
       allGames.forEach(game=>{
-        if (Date.now()-game.timeCreated > 2000){
+        if (Date.now()-game.timeCreated > 120000){
+          console.log("cleaning games");
+          console.log("this is player1 game" + game.player1);
           let player1 = this.database.object('players/'+game.player1);
           let player2 = this.database.object('players/'+game.player2);
           player1.update({currentGame: -1});

@@ -89,8 +89,8 @@ export class PlayerService {
     this.currentPlayer = this.database.object('players/' + key);
     this.currentGameState = this.database.object('players/'+key+'/currentGame');
     this.currentPlayer.subscribe(player=>{
+      console.log("This is the state: " + player.currentGame);
       this.ourGameRequests = this.database.list('players/'+key+'/requests/');
-      this.getFriends();
     })
   }
 
