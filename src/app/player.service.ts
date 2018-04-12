@@ -94,9 +94,6 @@ export class PlayerService {
     this.currentPlayer.subscribe(player=>{
       console.log("This is the state: " + player.currentGame);
       console.log(player.currentGame);
-      if (player.currentGame) {
-        this.router.navigate(['game', 'display', player.currentGame])
-      }
       this.ourGameRequests = this.database.list('players/'+key+'/requests/');
       this.getFriends();
     })

@@ -32,6 +32,24 @@ export class QueueService {
     })
   }
 
+  cleanGames(){
+    console.log("about to clean");
+    this.allGames.subscribe(allGames=>{
+      allGames.forEach(game=>{
+        if (Date.now()-game.timeCreated > 2000){
+          console.log("cleaning games");
+          console.log("this is player1 game" + game.player1);
+          let player1 = this.database.object('players/'+game.player1);
+          let player2 = this.database.object('players/'+game.player2);
+          player1.update({currentGame: -1});
+          player2.update({currentGame: -1});
+          console.log(game.$key);
+          this.database.object('allGames/'+game.$key).remove();
+        }
+      })
+    })
+  }
+
   initiateNewGame(request){
     let myNewGame = {
       player1: request.requestor, //**Fill with current player ID
@@ -39,8 +57,10 @@ export class QueueService {
       balloonsArrayKey: null,
       player1Score: 0,
       player2Score: 0,
-      time: 60
+      time: 60,
+      timeCreated: Date.now()
     }
+    console.log("current Time: " + Date.now());
     this.allGames.push(myNewGame)
     .then(snap=>{
       console.log("This is your game key: " + snap.key);
@@ -65,7 +85,7 @@ export class QueueService {
       this.prospectiveOpponentRequests.push({requestor: playerKey, requestee: opponentKey, requestTime: 30});
       firstSubscription.unsubscribe();
     })
-    
+
     console.log("about to add request to my queue");
     this.ourRequests = this.database.list('players/'+playerKey+'/requests/');
     setTimeout(this.iterateRequestTimers, 1000);
