@@ -1,24 +1,26 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <p> user create works</p>
-      <h1 *ngIf="authService.user | async">Welcome {{ (authService.user | async)?.email }}!</h1>
-
-      <div *ngIf="!(authService.user | async)">
+        <h1 class="text-center">REGISTER AN ACCOUNT!</h1>
+        <hr>
+        <h3>USERNAME:</h3>
         <input #username type="text" [(ngModel)]="userName" placeholder="username">
         <br>
+        <h3>EMAIL:</h3>
         <input type="text" [(ngModel)]="email" placeholder="email">
         <br>
+        <h3>PASSWORD:</h3>
         <input type="password" [(ngModel)]="password" placeholder="password">
         <br>
+        <div class="row text-center">
+          <div class="col-md-6">
+            <button class="btn" (click)="toLogin()">Back</button>
+          </div>
+          <div class="col-md-6">
+            <button class="btn" (click)="signup(username.value)" [disabled]="!userName || !email || !password">Register</button>
+          </div>
+        </div>
 
-        <button (click)="signup(username.value)" [disabled]="!userName || !email || !password">
-          Signup
-        </button>
-        <br>
-        <a href="/"><button>Login</button></a>
-
-      </div>
     </div>
   </div>
 </div>

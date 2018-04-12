@@ -46,11 +46,11 @@ export class GameService {
   popBalloon(balloonKey){
     let poppedBalloon;
     this.activeBalloons.subscribe(data=>{
-      // data.forEach(balloon=>{
-      //   if (balloon.$key === balloonKey) {
-      //     // this.activeGame[this.whichPlayer]+=balloon.score;
-      //   }
-      // });
+      data.forEach(balloon=>{
+        if (balloon.$key === balloonKey) {
+          this.activeGame[this.whichPlayer]+=balloon.score;
+        }
+      });
     })
 //    console.log("AllBalloonsArray: " + this.allBalloonsArrayKey)
 //    console.log(balloonKey);
@@ -86,8 +86,8 @@ export class GameService {
     this.allLocalSentences = BOOK.book[bookNumber].content.match( /[^\.!\?]+[\.!\?]+/g );
     //Non intelligently. Truncate string to 180
     for(var i = 0; i < this.allLocalSentences.length; i ++){
-      if(this.allLocalSentences[i].length > 180){
-        this.allLocalSentences[i] = this.allLocalSentences[i].slice(0,180);
+      if(this.allLocalSentences[i].length > 60){
+        this.allLocalSentences[i] = this.allLocalSentences[i].slice(0,60);
       }
     }
     // let newBalloon = {

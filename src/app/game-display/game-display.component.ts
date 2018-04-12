@@ -14,6 +14,7 @@ export class GameDisplayComponent implements OnInit {
   @ViewChild("myCanvas") myCanvas;
   balloonLocationArr: Array<Object> = [];
   context:CanvasRenderingContext2D;
+  currentGameTime;
 
   constructor(private gameService: GameService, private playerService: PlayerService, private route: ActivatedRoute, private router: Router) { }
 
@@ -78,6 +79,7 @@ export class GameDisplayComponent implements OnInit {
         this.drawBalloon(c, this.balloonLocationArr[3], 3, 1500, 800, this.gameService.currentTime, 90);
         this.drawBalloon(c, this.balloonLocationArr[4], 4, 1500, 800, this.gameService.currentTime, 180);
         }
+        this.currentGameTime = Math.floor(this.gameService.currentTime);
       }, 1000/60);
 
   }

@@ -54,9 +54,7 @@ export class PlayerService {
         friends.forEach(friendKey=>{
           this.localFriends.push(this.database.object('players/'+friendKey.friendKey));
           this.localFriends[this.localFriends.length-1].subscribe(friend=>{
-            console.log(friend);
           })
-          console.log(this.localFriends);
         });
       })
     })
@@ -74,7 +72,7 @@ export class PlayerService {
   findFriends(input: string, element){
     if (input.length >= 3){
       this.players.subscribe(players=>{
-        let potentialFriends = []; 
+        let potentialFriends = [];
         players.forEach(player=>{
           console.log("reading player.username: " + player.username);
           if (player.username){
@@ -113,5 +111,6 @@ export class PlayerService {
 
   logoutPlayer(){
     this.currentPlayer.update({loggedIn: false});
+    this.router.navigate(['']);
   }
 }
