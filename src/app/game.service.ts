@@ -16,6 +16,27 @@ export class GameService {
   book = null;
   allBalloonsArrayKey = null;
   allLocalSentences: string[] = null;
+  currentTimeObservable: FirebaseObjectObservable<any>;
+  currentTime: number = 60;
+
+  setActiveGame(gameId){
+    console.log("I'm setting active game");
+    console.log("I'm setting active game to: " + gameId);
+    this.activeGame = this.database.object('allGames/'+gameId);
+    this.currentTimeObservable = this.database.object('allGames/'+gameId+'/time');
+    this.currentTimeObservable.subscribe(time=>{
+      console.log("the received time subscription is: " + time);
+      console.log(time);
+      this.currentTime = time.$value;
+    })
+  }
+
+  incrementTime = ()=>{
+    if (this.currentTime > 0){
+      this.activeGame.update({time: this.currentTime-1});
+      setTimeout(this.incrementTime, 1000);
+    }
+  }
 
   getActiveBalloons(key){
     this.activeBalloons = this.database.list('allBalloonsArray/activeBalloons/' + key);
@@ -36,24 +57,22 @@ export class GameService {
   }
   addBalloon(){
 
-    this.newBalloons(0);
-      let newBalloon = {
-        score: 0,
-        content: '',
-        createdTime: 60
-      };
-      //Pick a randomSentence from allLocalballoons
-      //Change this function later on
-      let randomSentence = Math.floor(Math.random()*this.allLocalSentences.length);
-      //Set content to new balloon to the sentence
-      //Trim whitespaces, remove escape sequences,
-      newBalloon.content = this.allLocalSentences[randomSentence].replace(/[()]/g, '').replace(/\n/ig, ' ').replace(/\s+/g,' ').trim();
-      //Set score = to length of balloon
-      newBalloon.score = newBalloon.content.length;
-      //Push new balloon to active balloon
-  //    console.log(newBalloon);
-      this.activeBalloons.push(newBalloon);
-      return newBalloon;
+    let newBalloon = {
+      score: 0,
+      content: '',
+      createdTime: this.currentTime
+    };
+    //Pick a randomSentence from allLocalballoons
+    //Change this function later on
+    let randomSentence = Math.floor(Math.random()*this.allLocalSentences.length);
+    //Set content to new balloon to the sentence
+    //Trim whitespaces, remove escape sequences,
+    newBalloon.content = this.allLocalSentences[randomSentence].replace(/[()]/g, '').replace(/\n/ig, ' ').replace(/\s+/g,' ').trim();
+    //Set score = to length of balloon
+    newBalloon.score = newBalloon.content.length;
+    //Push new balloon to active balloon
+//    console.log(newBalloon);
+    this.activeBalloons.push(newBalloon);
   }
   //Used to generate allLocalSentences content for host from book selected.
   newBalloons(bookNumber){
