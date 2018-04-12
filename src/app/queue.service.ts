@@ -35,7 +35,7 @@ export class QueueService {
   cleanGames(){
     this.allGames.subscribe(allGames=>{
       allGames.forEach(game=>{
-        if (Date.now()-game.timeCreated > 10000){
+        if (Date.now()-game.timeCreated > 90000){
           console.log("cleaning games");
           console.log("this is player1 game" + game.player1);
           let player1 = this.database.object('players/'+game.player1);
@@ -48,10 +48,11 @@ export class QueueService {
     })
   }
 
-  initiateNewGame(request){
+  initiateNewGame(request, playerId){
+    let myPlayer2 = (playerId === request.requestor) ? request.requestee : request.requestor;
     let myNewGame = {
-      player1: request.requestor, //**Fill with current player ID
-      player2: request.requestee,
+      player1: playerId, //**Fill with current player ID
+      player2: myPlayer2,
       balloonsArrayKey: null,
       player1Score: 0,
       player2Score: 0,
@@ -60,7 +61,7 @@ export class QueueService {
     }
     this.allGames.push(myNewGame)
     .then(snap=>{
-      this.router.navigate(['game', 'display', snap.key])
+      this.router.navigate(['game', 'display', snap.key, playerId])
     })
   }
 

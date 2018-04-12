@@ -11,10 +11,13 @@ export class PlayerService {
   foundPotentialFriends = [];
   ourGameRequests: FirebaseListObservable<any>;
   currentGameState: FirebaseObjectObservable<any>;
+  currentGameId;
+  currentPlayerKey;
 
   constructor(private database: AngularFireDatabase, private router: Router) {
     this.players = this.database.list('players');
   }
+
 
   loginPlayer(userId: string, username: string){
     let exists = false;
@@ -29,9 +32,10 @@ export class PlayerService {
       });
       //if player does not already exist, create a new player
       if (!exists) {
+        let name = (username) ? username : 'guest';
         let newPlayer = {
           uid: userId,
-          username: username,
+          username: name,
           currentGame: null,
           wins: 0,
           losses: 0,
@@ -44,6 +48,15 @@ export class PlayerService {
         });
       }
     });
+  }
+
+  checkIfInGame = ()=>{
+    console.log("Seeing if should route");
+    console.log(this.currentGameId);
+    if (this.currentGameId == -1){
+      this.router.navigate(['user', 'display', this.currentPlayerKey]);
+    }
+    setTimeout(this.checkIfInGame, 3000);
   }
 
   getFriends(){
@@ -93,6 +106,8 @@ export class PlayerService {
     this.currentGameState = this.database.object('players/'+key+'/currentGame');
     this.currentPlayer.subscribe(player=>{
       console.log("This is the state: " + player.currentGame);
+      this.currentGameId = player.currentGame;
+      this.currentPlayerKey = player.$key;
       this.ourGameRequests = this.database.list('players/'+key+'/requests/');
     })
   }
