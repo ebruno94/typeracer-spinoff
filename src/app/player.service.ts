@@ -71,11 +71,14 @@ export class PlayerService {
 
   findFriends(input: string, element){
     if (input.length >= 3){
-      let potentialFriends = [];
       this.players.subscribe(players=>{
+        let potentialFriends = [];
         players.forEach(player=>{
-          if (player.username.search(input) !== -1){
-            potentialFriends.push({username: player.username, key: player.$key})
+          console.log("reading player.username: " + player.username);
+          if (player.username){
+            if (player.username.search(input) !== -1){
+              potentialFriends.push({username: player.username, key: player.$key})
+            }
           }
         })
         this.foundPotentialFriends = potentialFriends;

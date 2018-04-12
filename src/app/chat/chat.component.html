@@ -12,7 +12,7 @@
   </div>
 </div>
 <div id="details-container">
-    <p *ngFor="let item of items | async" style="width: 100%">{{item.message}}</p>
+  <div *ngFor="let item of items | async"  class="card"><h4>{{item.message}}</h4><br></div>
 </div>
 <hr>
 <input type="text" id="message" *ngIf="(user | async)?.uid" placeholder="Type your message here! Press Enter to Submit!" (keyup.enter)="Send($event.target.value)" [(ngModel)]="msgVal" />

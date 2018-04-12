@@ -2,10 +2,19 @@
   <h1 class="text-center" style="text-transform: uppercase">WELCOME, {{(playerService.currentPlayer | async)?.username}} !!</h1>
   <br>
   <div class="row">
-    <div class="col-md-7 card">
+    <div class="col-md-6 card">
       <h5>Wins: {{(playerService.currentPlayer | async)?.wins}} </h5>
-      <h5>Losses: {{(playerService.currentPlayer | async)?.losses}}  </h5>
-      <br><br>
+      <h5>Losses: {{(playerService.currentPlayer | async)?.losses}}</h5>
+      <hr>
+      <div class="row">
+        <h3>GAME REQUESTS</h3>
+        <div class="col-md-12 text-center card" style="overflow-y: scroll; height: 150px;">
+          <div *ngFor="let request of playerService.ourGameRequests | async">
+            <p>User{{request.requestor}} wants to play with you!</p>
+            <button type="button" class="btn" (click)="initiateNewGame(request)">Play Game!</button>
+          </div>
+        </div>
+      </div>
       <div class="row">
         <div class="col-md-6 text-center">
           <button type="button" class="btn" (click)="showDialog = !showDialog">User Settings</button>
@@ -26,15 +35,8 @@
         </div>
       </div>
       <button class="btn" (click)="showFriendSearch = !showFriendSearch">Friend Search</button>
-      <!-- <div *ngFor="let friend of friends">
-        <h4>{{friend.name}}</h4>
-        <p>{{friend.status}}</p>
-      </div> -->
     </div>
   </div>
-  <!-- <div class="row columns"> -->
-  <!-- <button (click)="login()" *ngIf="!(user | async)?.uid">Anonymous Login</button>
-  <button (click)="logout()" *ngIf="(user | async)?.uid">Logout</button> -->
   <div class="row">
     <div class="col-md-12 card">
       <app-chat></app-chat>
@@ -64,10 +66,3 @@
   </div>
   <button style="float: right" type="button" class="btn" (click)="showFriendSearch = !showFriendSearch">Close</button>
 <app-settings>
-
-
-<div *ngFor="let request of playerService.ourGameRequests | async">
-  <p>{{request.requestor}}</p>
-  <p>{{request.requestee}}</p>
-  <button type="button" class="btn" (click)="initiateNewGame(request)">Play Game!</button>
-</div>

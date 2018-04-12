@@ -11,6 +11,7 @@
 .dialog {
   z-index: 1000;
   position: absolute;
+  margin-top: 400px;
   right: 0;
   left: 0;
   margin-right: auto;
