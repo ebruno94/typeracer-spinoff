@@ -43,10 +43,7 @@ export class UserPanelComponent implements OnInit {
         if (state.$value !== -1) {
           console.log("My state value is:" + state.$value)
           this.router.navigate(['game', 'display', state.$value]);
-<<<<<<< HEAD
           window.location.reload();
-=======
->>>>>>> master
         }
       })
     })
