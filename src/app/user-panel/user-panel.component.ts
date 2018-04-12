@@ -35,10 +35,10 @@ export class UserPanelComponent implements OnInit {
     this.route.params.forEach(parameter=>{
       this.uid = parameter['uid'];
       this.playerService.setPlayer(this.uid);
-      this.playerService.getFriends(); 
+      this.playerService.getFriends();
       this.playerService.currentGameState.subscribe(state=>{
         if (state.$value !== -1) {
-          this.router.navigate(['game', 'display', state.$value]);
+          this.router.navigate(['game', 'display', state.$value, this.uid]);
           window.location.reload();
         }
       })
@@ -46,7 +46,7 @@ export class UserPanelComponent implements OnInit {
   }
 
   initiateNewGame(request){
-    this.queueService.initiateNewGame(request);
+    this.queueService.initiateNewGame(request, this.uid);
   }
 
 //

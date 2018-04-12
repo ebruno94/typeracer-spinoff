@@ -19,14 +19,26 @@ export class GameDisplayComponent implements OnInit {
   constructor(private gameService: GameService, private playerService: PlayerService, private route: ActivatedRoute, private router: Router) { }
 
   currentGameId;
+  currentPlayerId;
 
   ngOnInit(){
 
     this.route.params.forEach(parameter=>{
       this.currentGameId = parameter['gameid'];
+      this.currentPlayerId = parameter['playerid'];
+      console.log("current player id: " + this.currentPlayerId);
+      this.gameService.setCurrentPlayerId(this.currentPlayerId);
       // console.log(this.currentGameId);
     })
     this.gameService.setActiveGame(this.currentGameId);
+    this.gameService.activeGame.subscribe(game=>{
+      console.log("This is the current game player1id: " + game.player1);
+      if (game.player1 != this.currentPlayerId){
+        console.log("setting host to false");
+        this.gameService.isHost = false;
+        this.gameService.whichPlayer = 'player2';
+      }
+    })
 
     this.gameService.newBalloons(0);
 
@@ -35,7 +47,8 @@ export class GameDisplayComponent implements OnInit {
     // console.log("I'm initializing!!!");
     this.gameService.allBalloonsArray = this.gameService.database.list('allBalloonsArray');
     this.gameService.allBalloonsArray.subscribe(data=>{
-      if (this.gameService.isHost && !this.gameService.activeBalloons)        this.gameService.allBalloonsArray.push([])
+      if (!this.gameService.activeBalloons)
+      this.gameService.allBalloonsArray.push([])
       .then(data=>{
         // console.log("allBalloonsArray key: " + data.key);
         this.gameService.allBalloonsArrayKey = data.key;
@@ -50,7 +63,9 @@ export class GameDisplayComponent implements OnInit {
       });
     });
     this.createCanvas();
-    this.gameService.incrementTime();
+    if (this.gameService.isHost){
+      this.gameService.incrementTime();
+    }
   }
   drawBalloon(c, balloon, i, w, h, t, phaseAngle){
     c.fillStyle = "#ffffff"

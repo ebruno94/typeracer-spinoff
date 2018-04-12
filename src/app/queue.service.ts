@@ -42,20 +42,17 @@ export class QueueService {
           let player2 = this.database.object('players/'+game.player2);
           player1.update({currentGame: -1});
           player2.update({currentGame: -1});
-<<<<<<< HEAD
-          console.log(game.$key);
-=======
->>>>>>> 9f137eece49bb84355cbbc0afe3cee0e3dda2ee6
           this.database.object('allGames/'+game.$key).remove();
         }
       })
     })
   }
 
-  initiateNewGame(request){
+  initiateNewGame(request, playerId){
+    let myPlayer2 = (playerId === request.requestor) ? request.requestee : request.requestor;
     let myNewGame = {
-      player1: request.requestor, //**Fill with current player ID
-      player2: request.requestee,
+      player1: playerId, //**Fill with current player ID
+      player2: myPlayer2,
       balloonsArrayKey: null,
       player1Score: 0,
       player2Score: 0,
@@ -64,7 +61,7 @@ export class QueueService {
     }
     this.allGames.push(myNewGame)
     .then(snap=>{
-      this.router.navigate(['game', 'display', snap.key])
+      this.router.navigate(['game', 'display', snap.key, playerId])
     })
   }
 

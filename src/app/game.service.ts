@@ -11,17 +11,24 @@ export class GameService {
   activeBalloons: FirebaseListObservable<any>;
   activeGame: FirebaseObjectObservable<any>;
   currentUser: string = null;
-  whichPlayer: string = null;
+  whichPlayer: string = 'player1';
   isHost: boolean = true;
   book = null;
   allBalloonsArrayKey = null;
   allLocalSentences: string[] = null;
   currentTimeObservable: FirebaseObjectObservable<any>;
   currentTime: number = 60;
+  player1Score;
+  player2Score;
+  currentPlayerId;
 
   setActiveGame(gameId){
 
     this.activeGame = this.database.object('allGames/'+gameId);
+    this.activeGame.subscribe(game=>{
+      this.player1Score = game.player1Score;
+      this.player2Score = game.player2Score;
+    })
     this.currentTimeObservable = this.database.object('allGames/'+gameId+'/time');
     this.currentTimeObservable.subscribe(time=>{
     this.currentTime = time.$value;
@@ -36,6 +43,9 @@ export class GameService {
     }
   }
 
+  setCurrentPlayerId(playerId){
+    this.currentPlayerId = playerId;
+  }
   getActiveBalloons(key){
     this.activeBalloons = this.database.list('allBalloonsArray/activeBalloons/' + key);
   }
@@ -45,7 +55,11 @@ export class GameService {
     this.activeBalloons.subscribe(data=>{
       data.forEach(balloon=>{
         if (balloon.$key === balloonKey) {
-          this.activeGame[this.whichPlayer]+=balloon.score;
+          if (this.whichPlayer === "player1"){
+            this.activeGame.update({player1Score: this.player1Score + balloon.score});
+          } else {
+            this.activeGame.update({player2Score: this.player2Score + balloon.score});
+          }
         }
       });
     })
