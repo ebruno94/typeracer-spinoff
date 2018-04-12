@@ -55,7 +55,7 @@ export class GameDisplayComponent implements OnInit {
         this.gameService.getActiveBalloons(data.key);
         this.gameService.activeBalloons.subscribe(snap=>{
           this.balloonLocationArr = snap;
-          if (snap.length < 5 && this.gameService.isHost) {
+          if (snap.length < 5) {
             this.gameService.addBalloon();
             // console.log(this.gameService.activeBalloons);
           }
