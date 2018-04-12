@@ -59,7 +59,7 @@
   <input #friendSearch type="text" [ngModel]="friendSearch.value" (ngModelChange)="playerService.findFriends(friendSearch.value, potentialFriends)">
   <div class="card" style="height: 150px; overflow-y: scroll;">
     <ul #potentialFriends>
-      <li *ngFor="let friend of playerService.foundPotentialFriends">{{friend.username}}<button class="btn" style="float: right" (click)="playerService.addFriend(friend.key)">Add Friend</button></li>
+      <li *ngFor="let friend of playerService.foundPotentialFriends">{{friend.username}}<button class="btn" style="float: right" (click)="playerService.addFriend(friend.key)">Add Friend</button><br><hr></li>
     </ul>
   </div>
   <button style="float: right" type="button" class="btn" (click)="showFriendSearch = !showFriendSearch">Close</button>

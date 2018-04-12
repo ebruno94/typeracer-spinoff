@@ -1,12 +1,6 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <div *ngIf="authService.user | async">
-        <!-- <h1>Welcome {{ (authService.user | async)?.email }}!</h1>
-        <button (click)="logout()" class="btn">Logout</button> -->
-      </div>
-
-      <div *ngIf="!(authService.user | async)">
         <div class="text-center">
           <h1>WELCOME TO A TYPERACER SPINOFF</h1>
         </div>
@@ -27,7 +21,6 @@
             </button></a>
           </div>
         </div>
-      </div>
     </div>
   </div>
 </div>

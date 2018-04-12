@@ -16,9 +16,6 @@ export class LandingPageComponent implements OnInit {
   password: string;
   username: string;
   ngOnInit() {
-    this.authService.user.subscribe(user =>{
-      this.playerService.loginPlayer(user.uid, this.username);
-    })
   }
 
   login(username: string) {
