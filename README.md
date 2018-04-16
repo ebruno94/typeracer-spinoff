@@ -1,27 +1,43 @@
-# TyperacerSpinoff
+# TYPERACER SPINOFF!
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.3.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0.
 
-## Development server
+#### COMPETITIVE 2-PLAYER TYPERACER GAME 3/23/2018
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+#### By **Ernest B., Justin L., Alexander N., Tim F., Jahmanz W.**
 
-## Code scaffolding
+## Description
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+A website / program that lets users create a character with a name and pick a class for said character. The users are able to fight monsters that appear based on the character's level, they are able to cast spells and use items during the battle sequence. User obtains an item when monster is killed (BUGGED)
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+## Setup/Installation Requirements
 
-## Running unit tests
+1. Clone this repository from GitHub.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+2. Run npm install in the terminal.
 
-## Running end-to-end tests
+3. Shoot me an email request for an API key.
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+2. Run ng serve for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
 
-## Further help
+## Known Bugs
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+* Registration is a little buggy.
+
+## Technologies Used
+* HTML
+* CSS
+* Javascript / Typescript
+* Angular2
+* Firebase
+
+## Support and contact details
+
+_Email me @ ernest.bruno94@yahoo.com for questions, comments, or concerns._
+
+### License
+
+*{This software is licensed under the MIT license}*
+
+Copyright (c) 2018 **_{WeDOW}_**
